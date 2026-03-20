@@ -1,0 +1,213 @@
+import { useState, useEffect } from 'react';
+import TopNavigation from './components/TopNavigation';
+import SideNavigation from './components/SideNavigation';
+import EditorPanel from './components/EditorPanel';
+import PreviewPanel from './components/PreviewPanel';
+import DashboardView from './components/DashboardView';
+
+const generateId = () => crypto.randomUUID();
+
+const initialData = {
+  fullName: '',
+  jobTitle: '',
+  email: '',
+  phone: '',
+  location: '',
+  summary: '',
+  linkedin: '',
+  portfolio: '',
+  profileImage: '',
+  education: [],
+  experience: [],
+  skills: [],
+  projects: [],
+  expertise: [],
+  keywords: [],
+  languages: [],
+};
+
+function App() {
+  const [resumeData, setResumeData] = useState(() => {
+    const saved = localStorage.getItem('dossier_data');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error('Failed to parse dossier_data', e);
+      }
+    }
+    return initialData;
+  });
+  const [activeTab, setActiveTab] = useState('editor');
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('dossier_data', JSON.stringify(resumeData));
+  }, [resumeData]);
+
+  useEffect(() => {
+    const handleToggle = () => setIsPreviewMode(prev => !prev);
+    window.addEventListener('toggle-preview', handleToggle);
+    return () => window.removeEventListener('toggle-preview', handleToggle);
+  }, []);
+
+  // Update top-level personal info fields
+  const updatePersonalInfo = (field, value) => {
+    setResumeData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  // Add a new empty entry to an array (education, experience, or projects) with a valid unique ID
+  const addEntry = (type) => {
+    setResumeData((prev) => {
+      const newEntry = { id: generateId() };
+      
+      if (type === 'education') {
+        Object.assign(newEntry, { institution: '', degree: '', startYear: '', endYear: '' });
+      } else if (type === 'experience') {
+        Object.assign(newEntry, { company: '', role: '', description: '', startYear: '', endYear: '', isCurrent: false });
+      } else if (type === 'projects') {
+        Object.assign(newEntry, { title: '', role: '', description: '' });
+      } else if (type === 'languages') {
+        Object.assign(newEntry, { language: '', proficiency: '' });
+      }
+
+      return {
+        ...prev,
+        [type]: [...prev[type], newEntry]
+      };
+    });
+  };
+
+  const fillExampleData = () => {
+    setResumeData({
+      fullName: 'Wyze',
+      jobTitle: 'Frontend Developer',
+      email: 'hello@wyze.com',
+      phone: '+855 987-6543',
+      location: 'Cambodia, Phnom penh',
+      summary: 'Motivated and detail-oriented Junior Frontend Developer with a strong foundation in React and modern JavaScript. Passionate about building accessible, responsive web interfaces and eager to contribute to a collaborative engineering team. Fast learner with a proven track record of delivering clean, maintainable code during internships and academic projects.',
+      linkedin: 'linkedin.com/in/wyze',
+      portfolio: 'wyze.dev',
+      profileImage: '',
+      education: [
+        { id: generateId(), institution: 'Cambodia Academy of Digital Technology', degree: 'B.S. Computer Science', startYear: '2024', endYear: '2028' }
+      ],
+      experience: [
+        { id: generateId(), company: 'Digital Solutions Inc.', role: 'Frontend Web Intern', description: 'Assisted in the development of responsive UI components using React and Tailwind CSS. Collaborated with senior developers to improve website accessibility scores to 100 on Lighthouse. Participated in daily stand-ups and agile sprint planning.', startYear: '2023', endYear: '', isCurrent: true },
+        { id: generateId(), company: 'University Tech Labs', role: 'Student Web Developer', description: 'Maintained the department website and updated content schemas using HTML, CSS, and vanilla JavaScript. Automated broken-link reporting using a custom Node.js script.', startYear: '2021', endYear: '2023', isCurrent: false }
+      ],
+      skills: ['HTML/CSS', 'JavaScript (ES6+)', 'React', 'Tailwind CSS', 'Git & GitHub', 'Figma', 'Responsive Design'],
+      projects: [
+        { id: generateId(), title: 'Interactive Portfolio', role: 'Sole Developer', description: 'Designed and developed a personal portfolio website from scratch using React, Vite, and Tailwind CSS. Implemented smooth scrolling and dynamic routing.' },
+        { id: generateId(), title: 'Weather Application', role: 'Frontend Dev', description: 'Built a real-time weather dashboard utilizing the OpenWeather API. Features include geolocation tracking and dynamic background changes based on the forecast.' }
+      ],
+      expertise: [],
+      keywords: [],
+      languages: [
+        { id: generateId(), language: 'Khmer', proficiency: 'Native' },
+        { id: generateId(), language: 'English', proficiency: 'Intermediate' }
+      ],
+    });
+  };
+
+  const clearData = () => {
+    setResumeData(initialData);
+  };
+
+  // Remove an entry strictly by its unique ID
+  const removeEntry = (type, id) => {
+    setResumeData((prev) => ({
+      ...prev,
+      [type]: prev[type].filter(item => item.id !== id)
+    }));
+  };
+
+  // Update a specific field for a specific entry identified by ID
+  const updateEntry = (type, id, field, value) => {
+    setResumeData((prev) => ({
+      ...prev,
+      [type]: prev[type].map(item => 
+        item.id === id ? { ...item, [field]: value } : item
+      )
+    }));
+  };
+
+  // Add a new skill
+  const addSkill = (skillString) => {
+    const trimmed = skillString.trim();
+    if (trimmed && !resumeData.skills.includes(trimmed)) {
+      setResumeData(prev => ({ ...prev, skills: [...prev.skills, trimmed] }));
+    }
+  };
+
+  // Remove a skill by index
+  const removeSkill = (index) => {
+    setResumeData(prev => ({
+      ...prev,
+      skills: prev.skills.filter((_, i) => i !== index)
+    }));
+  };
+
+  const saveToDashboard = () => {
+    const saved = localStorage.getItem('saved_resumes');
+    let savedResumes = [];
+    if (saved) {
+      try {
+        savedResumes = JSON.parse(saved);
+      } catch (e) {
+        console.error('Failed to parse saved_resumes', e);
+      }
+    }
+    const newResume = { ...resumeData, savedAt: Date.now() };
+    savedResumes.push(newResume);
+    localStorage.setItem('saved_resumes', JSON.stringify(savedResumes));
+  };
+
+  const handleLoadResume = (resume) => {
+    if (resume) {
+      setResumeData(resume);
+    } else {
+      clearData();
+    }
+    setActiveTab('editor');
+    setIsPreviewMode(false);
+  };
+
+  return (
+    <div className="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+      {/* Top Navigation */}
+      <TopNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      {/* Conditional Side Navigation (only show in Editor) */}
+      {activeTab === 'editor' && !isPreviewMode && <SideNavigation fullName={resumeData.fullName} />}
+
+      {/* Main Content Canvas */}
+      <main className={`${activeTab === 'editor' && !isPreviewMode ? 'lg:ml-64' : ''} pt-16 h-screen flex flex-col md:flex-row overflow-hidden bg-surface transition-all duration-300`}>
+        {activeTab === 'editor' && (
+          <>
+            {/* Left Panel: Form Editor */}
+            {!isPreviewMode && (
+              <EditorPanel 
+                resumeData={resumeData} 
+                updatePersonalInfo={updatePersonalInfo}
+                addEntry={addEntry}
+                removeEntry={removeEntry}
+                updateEntry={updateEntry}
+                addSkill={addSkill}
+                removeSkill={removeSkill}
+                fillExampleData={fillExampleData}
+                clearData={clearData}
+              />
+            )}
+            {/* Right Panel: Resume Preview */}
+            <PreviewPanel resumeData={resumeData} saveToDashboard={saveToDashboard} />
+          </>
+        )}
+
+        {activeTab === 'resumes' && <DashboardView loadResume={handleLoadResume} />}
+      </main>
+    </div>
+  );
+}
+
+export default App;
