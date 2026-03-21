@@ -71,16 +71,16 @@ const CreativeTemplate = ({ data }) => {
         </aside>
 
         {/* RIGHT COLUMN: Experience & Education (8 cols) */}
-        <main className="col-span-8 space-y-6">
+        <main className="col-span-8 flex flex-col gap-4">
           
           {/* Experience Array */}
           {data.experience && data.experience.length > 0 && (
-            <div>
+            <div className="flex-1 bg-slate-50 p-6 rounded-3xl flex flex-col justify-center">
               <div className="flex items-center gap-4 mb-6">
                 <span className="w-10 h-10 rounded-full bg-[#115e59] text-white flex items-center justify-center font-bold font-serif text-xl border-4 border-[#ccfbf1]">1</span>
                 <h3 className="text-2xl font-black text-[#115e59] tracking-tight">Experience</h3>
               </div>
-              <div className="space-y-4 relative">
+              <div className="space-y-4 relative flex-grow">
                 <div className="absolute left-5 top-8 bottom-4 w-0.5 bg-slate-200 z-0"></div>
                 {data.experience.map((exp) => (
                   <div key={exp.id} className="relative z-10 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
@@ -100,12 +100,12 @@ const CreativeTemplate = ({ data }) => {
 
           {/* Education Array */}
           {data.education && data.education.length > 0 && (
-            <div className="pt-4">
+            <div className="flex-1 bg-slate-50 p-6 rounded-3xl flex flex-col justify-center">
               <div className="flex items-center gap-4 mb-6">
                 <span className="w-10 h-10 rounded-full bg-[#0d9488] text-white flex items-center justify-center font-bold font-serif text-xl border-4 border-[#ccfbf1]">2</span>
                 <h3 className="text-2xl font-black text-[#115e59] tracking-tight">Education</h3>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 flex-grow">
                 {data.education.map((edu) => (
                   <div key={edu.id} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                     <h4 className="text-sm font-bold text-[#0f766e] leading-tight mb-1">{edu.degree}</h4>
@@ -121,12 +121,12 @@ const CreativeTemplate = ({ data }) => {
 
           {/* Projects Array */}
           {data.projects && data.projects.length > 0 && (
-            <div className="pt-4">
+            <div className="flex-1 bg-slate-50 p-6 rounded-3xl flex flex-col justify-center">
               <div className="flex items-center gap-4 mb-6">
                 <span className="w-10 h-10 rounded-full bg-[#475569] text-white flex items-center justify-center font-bold font-serif text-xl border-4 border-slate-200">3</span>
                 <h3 className="text-2xl font-black text-[#334155] tracking-tight">Projects</h3>
               </div>
-              <div className="space-y-4">
+              <div className="space-y-4 flex-grow">
                 {data.projects.map((proj) => (
                   <div key={proj.id} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                     <div className="flex justify-between items-baseline mb-2">

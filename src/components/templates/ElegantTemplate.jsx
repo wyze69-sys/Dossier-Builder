@@ -43,12 +43,12 @@ const ElegantTemplate = ({ data }) => {
       <div className="w-full grid grid-cols-12 gap-6 flex-1">
         
         {/* Left Span: Details (4 Cols) */}
-        <aside className="col-span-4 space-y-6">
+        <aside className="col-span-4 flex flex-col gap-4">
           
           {/* Education Block */}
           {data.education && data.education.length > 0 && (
-            <div className="space-y-6">
-              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] border-b border-[#dddddd] pb-3">Education</h3>
+            <div className="flex-1 bg-black/5 p-5 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] pb-3 mb-2 border-b border-[#dddddd]/50">Education</h3>
               <div className="space-y-5">
                 {data.education.map((edu) => (
                   <div key={edu.id}>
@@ -65,8 +65,8 @@ const ElegantTemplate = ({ data }) => {
 
           {/* Languages Block */}
           {data.languages && data.languages.length > 0 && (
-            <div className="space-y-6">
-              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] border-b border-[#dddddd] pb-3">Languages</h3>
+            <div className="flex-1 bg-black/5 p-5 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] pb-3 mb-2 border-b border-[#dddddd]/50">Languages</h3>
               <div className="space-y-3">
                 {data.languages.map((lang) => (
                   <div key={lang.id} className="flex justify-between items-baseline border-b border-dashed border-[#e5e5e5] pb-2">
@@ -80,8 +80,8 @@ const ElegantTemplate = ({ data }) => {
 
           {/* Skills Block */}
           {data.skills && data.skills.length > 0 && (
-            <div className="space-y-6">
-              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] border-b border-[#dddddd] pb-3">Expertise</h3>
+            <div className="flex-1 bg-black/5 p-5 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] pb-3 mb-2 border-b border-[#dddddd]/50">Expertise</h3>
               <div className="flex flex-col gap-2">
                 {data.skills.map((skill, index) => (
                   <span key={index} className="font-sans text-[11px] tracking-wide text-[#5a5a5a] flex items-center gap-2">
@@ -97,12 +97,12 @@ const ElegantTemplate = ({ data }) => {
 
 
         {/* Right Span: Experience (8 Cols) */}
-        <main className="col-span-8 space-y-6">
+        <main className="col-span-8 flex flex-col gap-4">
           
           {/* Experience Timeline */}
           {data.experience && data.experience.length > 0 && (
-            <div className="space-y-6">
-              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] border-b border-[#dddddd] pb-3">Experience</h3>
+            <div className="flex-1 bg-black/5 p-6 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] pb-3 mb-4 border-b border-[#dddddd]/50">Experience</h3>
               <div className="space-y-6">
                 {data.experience.map((exp) => (
                   <div key={exp.id}>
@@ -124,8 +124,8 @@ const ElegantTemplate = ({ data }) => {
 
           {/* Projects Focus */}
           {data.projects && data.projects.length > 0 && (
-            <div className="space-y-6">
-              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] border-b border-[#dddddd] pb-3">Selected Works</h3>
+            <div className="flex-1 bg-black/5 p-6 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-[13px] font-sans tracking-[0.25em] uppercase text-[#1a1a1a] pb-3 mb-4 border-b border-[#dddddd]/50">Selected Works</h3>
               <div className="space-y-6">
                 {data.projects.map((proj) => (
                   <div key={proj.id}>

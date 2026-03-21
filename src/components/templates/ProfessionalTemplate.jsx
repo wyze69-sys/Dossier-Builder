@@ -61,7 +61,7 @@ const ProfessionalTemplate = ({ data }) => {
         )}
       </aside>
 
-      <main className="flex-1 bg-white p-8 flex flex-col space-y-6">
+      <main className="flex-1 bg-white p-8 flex flex-col gap-4">
         
         <div className="border-b-[3px] border-[#0f2942] pb-6">
           <h1 className="text-5xl font-extrabold text-[#0f2942] tracking-tighter mb-2">{data.fullName}</h1>
@@ -69,13 +69,13 @@ const ProfessionalTemplate = ({ data }) => {
         </div>
 
         {data.summary && (
-          <div>
-            <p className="text-sm text-slate-700 leading-relaxed text-justify">{data.summary}</p>
+          <div className="flex-1 bg-slate-50 p-6 rounded-2xl flex flex-col justify-center">
+            <p className="text-[12px] text-slate-700 leading-relaxed text-justify hyphens-auto break-words">{data.summary}</p>
           </div>
         )}
 
         {data.experience && data.experience.length > 0 && (
-          <div>
+          <div className="flex-1 bg-slate-50 p-6 rounded-2xl flex flex-col justify-center">
             <h3 className="text-sm font-bold text-[#0f2942] uppercase tracking-[0.2em] mb-4 flex items-center gap-4">
               <span className="w-8 h-[1px] bg-[#0f2942]"></span>
               Professional Experience
@@ -99,9 +99,9 @@ const ProfessionalTemplate = ({ data }) => {
           </div>
         )}
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4 flex-1">
           {data.education && data.education.length > 0 && (
-            <div>
+            <div className="flex-1 bg-slate-50 p-6 rounded-2xl flex flex-col justify-center">
               <h3 className="text-sm font-bold text-[#0f2942] uppercase tracking-[0.2em] mb-4 flex items-center gap-4">
                 <span className="w-8 h-[1px] bg-[#0f2942]"></span>
                 Education
@@ -119,7 +119,7 @@ const ProfessionalTemplate = ({ data }) => {
           )}
 
           {data.projects && data.projects.length > 0 && (
-            <div>
+            <div className="flex-1 bg-slate-50 p-6 rounded-2xl flex flex-col justify-center">
               <h3 className="text-sm font-bold text-[#0f2942] uppercase tracking-[0.2em] mb-4 flex items-center gap-4">
                 <span className="w-8 h-[1px] bg-[#0f2942]"></span>
                 Projects

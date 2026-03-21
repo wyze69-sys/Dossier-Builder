@@ -54,16 +54,16 @@ const MinimalTemplate = ({ data }) => {
         </header>
       )}
 
-      <div className="flex-1 space-y-6">
+      <div className="flex-1 flex flex-col gap-3 mt-4">
         
         {/* --- Professional Summary --- */}
         {summary && (
-          <section className="grid grid-cols-12 gap-6">
+          <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
             <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
               Profile
             </h3>
             <div className="col-span-9">
-              <p className="text-[11px] leading-relaxed text-slate-600 font-light whitespace-pre-wrap hyphens-auto break-words">
+              <p className="text-[11px] leading-relaxed text-slate-600 font-light text-justify hyphens-auto break-words">
                 {summary}
               </p>
             </div>
@@ -72,7 +72,7 @@ const MinimalTemplate = ({ data }) => {
 
         {/* --- Work Experience --- */}
         {experience?.length > 0 && (
-          <section className="grid grid-cols-12 gap-6">
+          <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
             <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
               Experience
             </h3>
@@ -91,7 +91,7 @@ const MinimalTemplate = ({ data }) => {
                     )}
                   </div>
                   {exp.description && (
-                    <p className="text-[11px] leading-relaxed text-slate-600 font-light whitespace-pre-wrap hyphens-auto break-words">
+                    <p className="text-[11px] leading-relaxed text-slate-600 font-light text-justify hyphens-auto break-words">
                       {exp.description}
                     </p>
                   )}
@@ -103,7 +103,7 @@ const MinimalTemplate = ({ data }) => {
 
         {/* --- Featured Projects --- */}
         {projects?.length > 0 && (
-          <section className="grid grid-cols-12 gap-6">
+          <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
             <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
               Projects
             </h3>
@@ -115,7 +115,7 @@ const MinimalTemplate = ({ data }) => {
                     {proj.role && <p className="text-xs text-slate-500 mt-1">{proj.role}</p>}
                   </div>
                   {proj.description && (
-                    <p className="text-[11px] leading-relaxed text-slate-600 font-light whitespace-pre-wrap hyphens-auto break-words">
+                    <p className="text-[11px] leading-relaxed text-slate-600 font-light text-justify hyphens-auto break-words">
                       {proj.description}
                     </p>
                   )}
@@ -127,7 +127,7 @@ const MinimalTemplate = ({ data }) => {
 
         {/* --- Education --- */}
         {education?.length > 0 && (
-          <section className="grid grid-cols-12 gap-6">
+          <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
             <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
               Education
             </h3>
@@ -151,7 +151,7 @@ const MinimalTemplate = ({ data }) => {
 
         {/* --- Core Skills --- */}
         {skills?.length > 0 && (
-          <section className="grid grid-cols-12 gap-6">
+          <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
             <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
               Skills
             </h3>
@@ -167,7 +167,7 @@ const MinimalTemplate = ({ data }) => {
 
         {/* --- Languages --- */}
         {languages?.length > 0 && (
-          <section className="grid grid-cols-12 gap-6">
+          <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
             <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
               Languages
             </h3>

@@ -19,8 +19,12 @@ const PreviewPanel = ({ resumeData, saveToDashboard }) => {
       const A4_WIDTH = 794;
       
       const availableWidth = container.clientWidth - 48;
+      const availableHeight = container.clientHeight - 48;
       
-      const newScale = Math.min(availableWidth / A4_WIDTH, 1.2); 
+      const widthScale = availableWidth / A4_WIDTH;
+      const heightScale = availableHeight / A4_HEIGHT;
+      
+      const newScale = Math.min(widthScale, heightScale, 1.2); 
       setScale(newScale > 0 ? newScale : 1);
     };
 

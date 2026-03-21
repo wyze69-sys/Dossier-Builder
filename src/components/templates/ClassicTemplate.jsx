@@ -28,14 +28,14 @@ const ClassicTemplate = ({ data }) => {
         </header>
       )}
 
-      <div className="flex-1 space-y-6">
+      <div className="flex-1 flex flex-col gap-3 mt-4">
         {/* Summary */}
         {data.summary && (
-          <section className="space-y-4">
-            <h3 className="text-lg font-bold uppercase tracking-widest text-black border-b border-slate-800 pb-1 mb-4">
+          <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-black border-b border-slate-200 pb-2 mb-4">
               Professional Summary
             </h3>
-            <p className="text-[13px] leading-relaxed text-slate-800 whitespace-pre-wrap hyphens-auto break-words">
+            <p className="text-[12px] leading-relaxed text-slate-800 text-justify hyphens-auto break-words">
               {data.summary}
             </p>
           </section>
@@ -43,22 +43,22 @@ const ClassicTemplate = ({ data }) => {
 
         {/* Experience */}
         {data.experience && data.experience.length > 0 && (
-          <section className="space-y-4">
-            <h3 className="text-lg font-bold uppercase tracking-widest text-black border-b border-slate-800 pb-1 mb-4">
+          <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-black border-b border-slate-200 pb-2 mb-4">
               Experience
             </h3>
             <div className="space-y-4">
               {data.experience.map((exp) => (
                 <div key={exp.id} className="space-y-2">
                   <div className="flex justify-between items-baseline">
-                    <h4 className="font-bold text-base text-black">{exp.company}</h4>
-                    <span className="text-sm font-semibold text-slate-600">
+                    <h4 className="font-bold text-[14px] text-black">{exp.company}</h4>
+                    <span className="text-[11px] font-semibold text-slate-500">
                       {exp.startYear} {(exp.startYear && (exp.endYear || exp.isCurrent)) ? '—' : ''} {exp.isCurrent ? 'Present' : exp.endYear}
                     </span>
                   </div>
-                  {exp.role && <p className="text-sm italic text-slate-800 font-medium">{exp.role}</p>}
+                  {exp.role && <p className="text-[12px] italic text-slate-700 font-medium">{exp.role}</p>}
                   {exp.description && (
-                    <p className="text-[13px] leading-relaxed text-slate-800 whitespace-pre-wrap hyphens-auto break-words">
+                    <p className="text-[12px] leading-relaxed text-slate-800 text-justify hyphens-auto break-words">
                       {exp.description}
                     </p>
                   )}
@@ -70,19 +70,19 @@ const ClassicTemplate = ({ data }) => {
 
         {/* Projects */}
         {data.projects && data.projects.length > 0 && (
-          <section className="space-y-4">
-            <h3 className="text-lg font-bold uppercase tracking-widest text-black border-b border-slate-800 pb-1 mb-4">
+          <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-black border-b border-slate-200 pb-2 mb-4">
               Selected Projects
             </h3>
             <div className="space-y-4">
               {data.projects.map((proj) => (
                 <div key={proj.id} className="space-y-2">
-                  <div className="flex justify-between items-baseline text-black font-bold text-base">
+                  <div className="flex justify-between items-baseline text-black font-bold text-[14px]">
                     <h4>{proj.title}</h4>
                   </div>
-                  {proj.role && <p className="text-sm italic text-slate-800 font-medium">{proj.role}</p>}
+                  {proj.role && <p className="text-[12px] italic text-slate-700 font-medium">{proj.role}</p>}
                   {proj.description && (
-                    <p className="text-[13px] leading-relaxed text-slate-800 whitespace-pre-wrap hyphens-auto break-words">
+                    <p className="text-[12px] leading-relaxed text-slate-800 text-justify hyphens-auto break-words">
                       {proj.description}
                     </p>
                   )}
@@ -94,18 +94,18 @@ const ClassicTemplate = ({ data }) => {
 
         {/* Education */}
         {data.education && data.education.length > 0 && (
-          <section className="space-y-4">
-            <h3 className="text-lg font-bold uppercase tracking-widest text-black border-b border-slate-800 pb-1 mb-4">
+          <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-black border-b border-slate-200 pb-2 mb-4">
               Education
             </h3>
             <div className="space-y-4">
               {data.education.map((edu) => (
                 <div key={edu.id} className="flex justify-between items-baseline">
                   <div>
-                    {edu.degree && <h4 className="font-bold text-base text-black">{edu.degree}</h4>}
-                    {edu.institution && <p className="text-sm text-slate-700 italic">{edu.institution}</p>}
+                    {edu.degree && <h4 className="font-bold text-[14px] text-black">{edu.degree}</h4>}
+                    {edu.institution && <p className="text-[11px] text-slate-600 italic">{edu.institution}</p>}
                   </div>
-                  <div className="text-sm font-semibold text-slate-600">
+                  <div className="text-[11px] font-semibold text-slate-500">
                     {edu.startYear} {(edu.startYear && edu.endYear) ? '—' : ''} {edu.endYear}
                   </div>
                 </div>
@@ -116,11 +116,11 @@ const ClassicTemplate = ({ data }) => {
 
         {/* Skills */}
         {data.skills && data.skills.length > 0 && (
-          <section className="space-y-4">
-            <h3 className="text-lg font-bold uppercase tracking-widest text-black border-b border-slate-800 pb-1 mb-4">
+          <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-black border-b border-slate-200 pb-2 mb-4">
               Technical Skills
             </h3>
-            <p className="text-[13px] leading-relaxed text-slate-800">
+            <p className="text-[12px] leading-relaxed text-slate-800">
               {data.skills.join(', ')}
             </p>
           </section>
@@ -128,13 +128,13 @@ const ClassicTemplate = ({ data }) => {
 
         {/* Languages */}
         {data.languages && data.languages.length > 0 && (
-          <section className="space-y-4">
-            <h3 className="text-lg font-bold uppercase tracking-widest text-black border-b border-slate-800 pb-1 mb-4">
+          <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+            <h3 className="text-sm font-bold uppercase tracking-widest text-black border-b border-slate-200 pb-2 mb-4">
               Languages
             </h3>
             <div className="flex flex-col gap-2">
               {data.languages.map((lang, index) => (
-                <div key={lang.id || index} className="flex justify-between text-[13px] text-slate-800 max-w-sm">
+                <div key={lang.id || index} className="flex justify-between text-[12px] text-slate-800 max-w-sm">
                   <span className="font-bold">{lang.language}</span>
                   <span className="italic">{lang.proficiency}</span>
                 </div>

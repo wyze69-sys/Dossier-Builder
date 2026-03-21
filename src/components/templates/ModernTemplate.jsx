@@ -1,7 +1,7 @@
 const ModernTemplate = ({ data }) => {
   return (
     <div className="flex w-full min-h-[297mm] font-manrope text-slate-900 bg-white">
-      <div className="w-[28%] bg-[#0B1426] text-white p-6 flex flex-col gap-6">
+      <div className="w-[25%] bg-[#0B1426] text-white p-6 flex flex-col gap-6">
         <div className="space-y-4">
           {data.profileImage && (
             <div className="w-24 h-24 rounded-2xl bg-slate-800 overflow-hidden">
@@ -113,7 +113,7 @@ const ModernTemplate = ({ data }) => {
         )}
       </div>
 
-      <div className="flex-1 p-8 bg-white">
+      <div className="flex-1 p-8 bg-white flex flex-col">
         {(data.fullName || data.jobTitle) && (
           <header className="mb-8">
             {data.fullName && (
@@ -130,24 +130,24 @@ const ModernTemplate = ({ data }) => {
           </header>
         )}
 
-        <div className="space-y-6">
+        <div className="flex flex-col flex-1 gap-3">
           {data.summary && (
-            <section className="space-y-4">
-              <h3 className="text-[13px] font-bold uppercase tracking-[0.2em] text-slate-400">
+            <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-[13px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-3">
                 Profile
               </h3>
-              <p className="text-[11px] leading-relaxed text-slate-600 whitespace-pre-wrap hyphens-auto break-words">
+              <p className="text-[11px] leading-relaxed text-slate-600 text-justify hyphens-auto break-words">
                 {data.summary}
               </p>
             </section>
           )}
 
           {data.experience && data.experience.length > 0 && (
-            <section className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400">
+            <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
                 Experience
               </h3>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
                 {data.experience.map((exp) => (
                   <div
                     key={exp.id}
@@ -163,7 +163,7 @@ const ModernTemplate = ({ data }) => {
                     </div>
                     {exp.role && <p className="text-xs font-semibold text-blue-700 mb-2">{exp.role}</p>}
                     {exp.description && (
-                      <p className="text-[11px] leading-relaxed text-slate-600 whitespace-pre-wrap hyphens-auto break-words">
+                      <p className="text-[11px] leading-relaxed text-slate-600 text-justify hyphens-auto break-words">
                         {exp.description}
                       </p>
                     )}
@@ -174,11 +174,11 @@ const ModernTemplate = ({ data }) => {
           )}
 
           {data.projects && data.projects.length > 0 && (
-            <section className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400">
+            <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
                 Selected Projects
               </h3>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
                 {data.projects.map((proj) => (
                   <div
                     key={proj.id}
@@ -189,7 +189,7 @@ const ModernTemplate = ({ data }) => {
                     </div>
                     {proj.role && <p className="text-xs font-semibold text-blue-700 mb-2">{proj.role}</p>}
                     {proj.description && (
-                      <p className="text-[11px] leading-relaxed text-slate-600 whitespace-pre-wrap hyphens-auto break-words">
+                      <p className="text-[11px] leading-relaxed text-slate-600 text-justify hyphens-auto break-words">
                         {proj.description}
                       </p>
                     )}
@@ -200,11 +200,11 @@ const ModernTemplate = ({ data }) => {
           )}
 
           {data.education && data.education.length > 0 && (
-            <section className="space-y-4">
-              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400">
+            <section className="flex-1 bg-slate-50 p-5 rounded-2xl flex flex-col justify-center">
+              <h3 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-4">
                 Education
               </h3>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-3">
                 {data.education.map((edu) => (
                   <div key={edu.id} className="flex justify-between gap-4">
                     <div className="space-y-1">
