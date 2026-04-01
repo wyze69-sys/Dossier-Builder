@@ -1,11 +1,8 @@
 const TemplatesView = () => {
   const templates = [
     { id: 'modern', name: 'Modern Architecture', desc: 'Clean lines and distinct hierarchy.', active: true },
-    { id: 'classic', name: 'Classic Serif', desc: 'Traditional elegance and timeless reading experience.', active: false },
-    { id: 'minimal', name: 'Minimalist Sans', desc: 'Space-efficient, focusing exclusively on content.', active: false },
+    { id: 'professional', name: 'Executive Suite', desc: 'Optimized for ATS and C-level board reviews.', active: false },
     { id: 'creative', name: 'Creative Portfolio', desc: 'Bold colors for design-focused professionals.', active: false },
-    { id: 'executive', name: 'Executive Suite', desc: 'Optimized for ATS and C-level board reviews.', active: false },
-    { id: 'developer', name: 'Code Contributor', desc: 'Monospace accents with GitHub metrics integration.', active: false },
   ];
 
   return (

@@ -5,7 +5,11 @@ const SkillsForm = ({ skills, addSkill, removeSkill }) => {
 
   const handleAdd = () => {
     if (newSkill.trim()) {
-      addSkill(newSkill);
+      // Split by comma in case user pastes a comma-separated list
+      const items = newSkill.split(',').map(s => s.trim()).filter(Boolean);
+      items.forEach(item => {
+        addSkill(item);
+      });
       setNewSkill('');
     }
   };
@@ -38,7 +42,7 @@ const SkillsForm = ({ skills, addSkill, removeSkill }) => {
               <button
                 type="button"
                 onClick={() => removeSkill(index)}
-                className="material-symbols-outlined text-[14px]"
+                className="material-symbols-outlined text-[14px] hover:text-error transition-colors"
               >
                 close
               </button>
@@ -47,16 +51,22 @@ const SkillsForm = ({ skills, addSkill, removeSkill }) => {
         </div>
 
         {/* Add Skill Input */}
-        <div className="relative">
+        <div className="relative flex items-center">
           <input
-            className="w-full h-10 px-4 pr-10 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
+            className="w-full h-10 px-4 pr-12 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
             type="text"
+            placeholder="E.g. JavaScript, React, Node.js..."
             value={newSkill}
             onChange={(e) => setNewSkill(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <button type="button" onClick={handleAdd}>
-            <span className="material-symbols-outlined absolute right-3 top-2.5 text-outline">
+          <button 
+            type="button" 
+            onClick={handleAdd}
+            className="absolute right-2 p-1.5 flex items-center justify-center text-outline hover:text-primary transition-colors rounded-md hover:bg-surface-container-high"
+            title="Add Skill"
+          >
+            <span className="material-symbols-outlined text-[20px]">
               add_circle
             </span>
           </button>
