@@ -33,7 +33,7 @@ const EditorPanel = ({
             <button
               type="button"
               onClick={clearData}
-              className="px-4 py-2 text-xs font-semibold text-error bg-error/10 hover:bg-error/20 rounded-lg transition-colors flex items-center gap-2"
+              className="px-4 py-2 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors flex items-center gap-2"
             >
               <span className="material-symbols-outlined text-[16px]">delete</span>
               Clear Data
@@ -41,7 +41,7 @@ const EditorPanel = ({
             <button
               type="button"
               onClick={fillExampleData}
-              className="px-4 py-2 text-xs font-semibold text-primary bg-primary/10 hover:bg-primary/20 rounded-lg transition-colors flex items-center gap-2"
+              className="px-4 py-2 text-xs font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors flex items-center gap-2"
             >
               <span className="material-symbols-outlined text-[16px]">magic_button</span>
               Fill with Example

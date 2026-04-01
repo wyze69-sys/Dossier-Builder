@@ -6,7 +6,7 @@ const TopNavigation = ({ activeTab, setActiveTab }) => {
         <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50 font-manrope">
           Dossier Builder
         </span>
-        <span className="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-wider">
+        <span className="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-700 text-[10px] font-bold uppercase tracking-wider">
           Live Preview
         </span>
       </div>
@@ -40,12 +40,12 @@ const TopNavigation = ({ activeTab, setActiveTab }) => {
         <button 
           type="button" 
           onClick={() => window.dispatchEvent(new Event('toggle-preview'))}
-          className="px-4 py-2 text-sm font-medium text-secondary hover:bg-slate-100/50 rounded-lg transition-colors flex items-center gap-2"
+          className="px-4 py-2 text-sm font-bold text-primary bg-primary-light/20 hover:bg-primary-light/40 rounded-lg transition-colors flex items-center gap-2"
         >
           <span className="material-symbols-outlined text-[20px]">visibility</span>
           Live Preview
         </button>
-        <button type="button" onClick={() => window.dispatchEvent(new Event('download-pdf'))} className="px-5 py-2 text-sm font-semibold text-white btn-primary-gradient rounded-lg shadow-sm hover:opacity-90 active:scale-95 transition-all flex items-center gap-2">
+        <button type="button" onClick={() => window.dispatchEvent(new Event('download-pdf'))} className="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-primary-dark rounded-lg shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center gap-2">
           <span className="material-symbols-outlined text-[20px]">download</span>
           Download PDF
         </button>

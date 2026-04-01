@@ -57,7 +57,7 @@ const PreviewPanel = ({ resumeData, saveToDashboard }) => {
   }, []);
 
   return (
-    <section ref={containerRef} className="flex-1 overflow-y-auto p-6 md:p-10 bg-slate-50 flex flex-col items-center">
+    <section ref={containerRef} className="flex-1 overflow-y-auto p-6 md:p-10 bg-white flex flex-col items-center">
       <div className="resume-preview-controls w-full max-w-[794px] mb-8 flex items-center justify-between">
         <div className="bg-white shadow-sm p-1 rounded-xl flex items-center gap-1 overflow-x-auto">
           {['professional', 'modern', 'creative'].map(t => (
@@ -65,7 +65,7 @@ const PreviewPanel = ({ resumeData, saveToDashboard }) => {
               key={t}
               type="button"
               onClick={() => setTemplate(t)}
-              className={`px-4 py-1.5 text-xs font-bold rounded-lg transition-colors capitalize whitespace-nowrap ${template === t ? 'bg-slate-800 text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+              className={`px-4 py-1.5 text-xs font-bold rounded-lg transition-colors capitalize whitespace-nowrap ${template === t ? 'bg-primary text-white' : 'text-slate-600 hover:bg-primary-light/30'}`}
             >
               {t}
             </button>

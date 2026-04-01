@@ -76,17 +76,17 @@ const SideNavigation = ({ fullName }) => {
       </nav>
 
       {/* User Profile Card */}
-      <div className="mt-auto p-4 bg-surface-container-low rounded-xl">
+      <div className="mt-auto p-4 bg-slate-50 border border-slate-100 rounded-xl">
         <div className="flex items-center gap-3 mb-3">
-          <div className="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center">
-            <span className="material-symbols-outlined text-primary text-[18px]">account_circle</span>
+          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
+            <span className="material-symbols-outlined text-indigo-600 text-[18px]">account_circle</span>
           </div>
           <div>
-            <p className="text-xs font-bold text-on-surface">{fullName || 'User'}</p>
-            <p className="text-[10px] text-on-surface-variant">Free Plan</p>
+            <p className="text-xs font-bold text-slate-800">{fullName || 'User'}</p>
+            <p className="text-[10px] text-slate-500">Free Plan</p>
           </div>
         </div>
-        <button type="button" className="w-full py-2 bg-on-secondary-fixed text-white text-[10px] font-bold uppercase tracking-widest rounded-lg">
+        <button type="button" className="w-full py-2 bg-slate-800 hover:bg-slate-900 transition-colors text-white text-[10px] font-bold uppercase tracking-widest rounded-lg">
           Upgrade
         </button>
       </div>
