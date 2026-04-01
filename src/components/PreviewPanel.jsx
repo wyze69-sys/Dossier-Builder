@@ -37,21 +37,36 @@ const PreviewPanel = ({ resumeData, saveToDashboard }) => {
     const element = document.getElementById('resume-pdf-target');
     if (!element) return;
     
-    const originalScale = element.style.transform;
-    element.style.transform = 'scale(1)';
+    // 1. Store original styles to restore later
+    const originalStyle = element.getAttribute('style');
+    
+    // 2. Temporarily reset styles for clean capture
+    // Resetting transform, margins, and ensuring it's at normal scale (1)
+    element.style.transform = 'none';
+    element.style.margin = '0';
+    element.style.padding = '0';
+    element.style.position = 'relative';
+    element.style.left = '0';
+    element.style.top = '0';
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 0));
+      // Small delay to ensure styles are applied
+      await new Promise(resolve => setTimeout(resolve, 50));
 
       const canvas = await html2canvas(element, { 
         scale: 2, 
         useCORS: true, 
-        scrollY: -window.scrollY, 
-        windowWidth: document.documentElement.offsetWidth 
+        logging: false, 
+        windowWidth: document.documentElement.offsetWidth,
+        backgroundColor: '#ffffff'
       });
-      const imgData = canvas.toDataURL('image/png');
       
+      const imgData = canvas.toDataURL('image/png', 1.0);
+      
+      // 3. Instantiate jsPDF as specified (landscape 'p', mm, a4)
       const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      // 4. Add image at (0, 0, 210, 297)
       pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
       
       if (saveToDashboard) {
@@ -61,7 +76,14 @@ const PreviewPanel = ({ resumeData, saveToDashboard }) => {
     } catch (error) {
       console.error('Failed to generate PDF', error);
     } finally {
-      element.style.transform = originalScale;
+      // 5. Restore original styles immediately
+      if (originalStyle) {
+        element.setAttribute('style', originalStyle);
+      } else {
+        element.style.transform = `scale(${Math.max(0.2, scale + zoomOffset)})`;
+        element.style.transformOrigin = 'top center';
+        element.style.marginBottom = `calc(-297mm * ${1 - Math.max(0.2, scale + zoomOffset)})`;
+      }
     }
   };
 

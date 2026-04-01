@@ -64,3 +64,16 @@ body {
   background-color: #d3e4ff;
   color: #001c38;
 }
+
+/* ─── Print & PDF Optimization ─── */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

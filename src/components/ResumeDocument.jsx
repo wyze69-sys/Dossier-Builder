@@ -8,7 +8,15 @@ import ElegantTemplate from './templates/ElegantTemplate';
 const ResumeDocument = ({ data, template = 'modern' }) => {
   return (
     <div
-      className="w-[210mm] min-h-[297mm] bg-white shadow-2xl mx-auto overflow-hidden relative"
+      className="bg-white shadow-2xl mx-auto relative flex flex-col"
+      style={{
+        width: '210mm',
+        height: '297mm',
+        minHeight: '297mm',
+        boxSizing: 'border-box',
+        aspectRatio: '210/297',
+        overflow: 'hidden'
+      }}
       id="resume-document"
     >
       {template === 'modern' && <ModernTemplate data={data} />}
