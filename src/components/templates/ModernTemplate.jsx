@@ -80,7 +80,7 @@ const ModernTemplate = ({ data }) => {
                 <div key={item.id || index} className="space-y-1.5">
                   <div className="flex justify-between text-[10px] font-medium">
                     <span>{item.name}</span>
-                    <span>{item.level}%</span>
+                    <span className="text-slate-700">{item.level}%</span>
                   </div>
                   <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
                     <div
@@ -104,7 +104,7 @@ const ModernTemplate = ({ data }) => {
                 <div key={lang.id || index} className="space-y-1">
                   <div className="flex justify-between text-[10px] font-medium">
                     <span>{lang.language}</span>
-                    <span className="text-blue-200">{lang.proficiency}</span>
+                  <span className="text-slate-700">{lang.proficiency}</span>
                   </div>
                 </div>
               ))}
@@ -156,7 +156,7 @@ const ModernTemplate = ({ data }) => {
                     <div className="flex justify-between items-baseline mb-1">
                       {exp.company && <h4 className="text-base font-bold text-slate-800">{exp.company}</h4>}
                       {(exp.startYear || exp.endYear || exp.isCurrent) && (
-                        <span className="text-[10px] font-bold text-slate-400 uppercase">
+                        <span className="text-[10px] font-bold text-slate-700 uppercase">
                           {exp.startYear} {(exp.startYear && (exp.endYear || exp.isCurrent)) ? '—' : ''} {exp.isCurrent ? 'Present' : exp.endYear}
                         </span>
                       )}
@@ -213,7 +213,7 @@ const ModernTemplate = ({ data }) => {
                     </div>
                     <div className="text-right">
                       {(edu.startYear || edu.endYear) && (
-                        <p className="text-[10px] font-bold text-slate-400">
+                        <p className="text-[10px] font-bold text-slate-700">
                           {edu.startYear} {(edu.startYear && edu.endYear) ? '—' : ''} {edu.endYear}
                         </p>
                       )}

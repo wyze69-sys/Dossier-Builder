@@ -76,4 +76,27 @@ body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
+
+  /* Hide all UI elements except the resume document */
+  body > * { display: none !important; }
+  #resume-pdf-target { display: block !important; }
+}
+
+/* ─── PDF Capture Target: Suppress Web-Only Elements ─── */
+#resume-pdf-target {
+  /* Disable all scrollbars inside the capture target */
+  overflow: hidden !important;
+}
+
+#resume-pdf-target * {
+  /* Kill all hover/focus/active transitions during capture */
+  transition: none !important;
+  animation: none !important;
+  /* Suppress any custom scrollbars */
+  scrollbar-width: none !important;
+}
+
+#resume-pdf-target *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
 }

@@ -65,7 +65,7 @@ const ProfessionalTemplate = ({ data }) => {
         
         <div className="border-b-[3px] border-[#0f2942] pb-6">
           <h1 className="text-5xl font-extrabold text-[#0f2942] tracking-tighter mb-2">{data.fullName}</h1>
-          <h2 className="text-xl font-medium text-slate-500 uppercase tracking-widest">{data.jobTitle}</h2>
+          <h2 className="text-xl font-medium text-slate-700 uppercase tracking-widest">{data.jobTitle}</h2>
         </div>
 
         {data.summary && (
@@ -91,7 +91,7 @@ const ProfessionalTemplate = ({ data }) => {
                       {exp.startYear} — {exp.isCurrent ? 'Present' : exp.endYear}
                     </span>
                   </div>
-                  <h5 className="text-sm font-bold text-slate-500 mb-2">{exp.company}</h5>
+                  <h5 className="text-sm font-bold text-slate-700 mb-2">{exp.company}</h5>
                   <p className="text-[11px] text-slate-600 leading-relaxed text-justify hyphens-auto break-words">{exp.description}</p>
                 </div>
               ))}
@@ -110,7 +110,7 @@ const ProfessionalTemplate = ({ data }) => {
                 {data.education.map((edu) => (
                   <div key={edu.id}>
                     <h4 className="text-sm font-bold text-slate-800">{edu.degree}</h4>
-                    <h5 className="text-xs text-slate-500">{edu.institution}</h5>
+                    <h5 className="text-xs text-slate-700">{edu.institution}</h5>
                     <p className="text-xs font-semibold text-[#0f2942] mt-1">{edu.startYear} — {edu.endYear}</p>
                   </div>
                 ))}

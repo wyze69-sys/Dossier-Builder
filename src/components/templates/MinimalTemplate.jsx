@@ -59,7 +59,7 @@ const MinimalTemplate = ({ data }) => {
         {/* --- Professional Summary --- */}
         {summary && (
           <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
-            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
+            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-600 pt-1">
               Profile
             </h3>
             <div className="col-span-9">
@@ -73,7 +73,7 @@ const MinimalTemplate = ({ data }) => {
         {/* --- Work Experience --- */}
         {experience?.length > 0 && (
           <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
-            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
+            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-600 pt-1">
               Experience
             </h3>
             <div className="col-span-9 space-y-6">
@@ -82,10 +82,10 @@ const MinimalTemplate = ({ data }) => {
                   <div className="flex justify-between items-baseline">
                     <div>
                       {exp.company && <h4 className="text-sm font-semibold text-black tracking-wide">{exp.company}</h4>}
-                      {exp.role && <p className="text-xs text-slate-500 mt-1">{exp.role}</p>}
+                      {exp.role && <p className="text-xs text-slate-700 mt-1">{exp.role}</p>}
                     </div>
                     {formatDateRange(exp.startYear, exp.endYear, exp.isCurrent) && (
-                      <span className="text-[11px] tracking-widest text-slate-400 uppercase whitespace-nowrap ml-4">
+                      <span className="text-[11px] tracking-widest text-slate-600 uppercase whitespace-nowrap ml-4">
                         {formatDateRange(exp.startYear, exp.endYear, exp.isCurrent)}
                       </span>
                     )}
@@ -104,7 +104,7 @@ const MinimalTemplate = ({ data }) => {
         {/* --- Featured Projects --- */}
         {projects?.length > 0 && (
           <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
-            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
+            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-600 pt-1">
               Projects
             </h3>
             <div className="col-span-9 space-y-6">
@@ -128,7 +128,7 @@ const MinimalTemplate = ({ data }) => {
         {/* --- Education --- */}
         {education?.length > 0 && (
           <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
-            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
+            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-600 pt-1">
               Education
             </h3>
             <div className="col-span-9 space-y-4">
@@ -136,10 +136,10 @@ const MinimalTemplate = ({ data }) => {
                 <div key={edu.id || index} className="flex justify-between items-baseline">
                   <div className="space-y-1">
                     {edu.degree && <h4 className="text-sm font-semibold text-black tracking-wide">{edu.degree}</h4>}
-                    {edu.institution && <p className="text-[11px] text-slate-500">{edu.institution}</p>}
+                    {edu.institution && <p className="text-[11px] text-slate-700">{edu.institution}</p>}
                   </div>
                   {formatDateRange(edu.startYear, edu.endYear, false) && (
-                    <span className="text-[11px] tracking-widest text-slate-400 uppercase whitespace-nowrap ml-4">
+                    <span className="text-[11px] tracking-widest text-slate-600 uppercase whitespace-nowrap ml-4">
                       {formatDateRange(edu.startYear, edu.endYear, false)}
                     </span>
                   )}
@@ -152,12 +152,12 @@ const MinimalTemplate = ({ data }) => {
         {/* --- Core Skills --- */}
         {skills?.length > 0 && (
           <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
-            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
+            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-600 pt-1">
               Skills
             </h3>
             <div className="col-span-9 flex flex-wrap gap-x-6 gap-y-3 pt-0.5">
               {skills.map((skill, index) => (
-                <span key={index} className="text-xs text-slate-600 font-light tracking-wide">
+                <span key={index} className="text-xs text-slate-800 font-medium tracking-wide">
                   {skill}
                 </span>
               ))}
@@ -168,7 +168,7 @@ const MinimalTemplate = ({ data }) => {
         {/* --- Languages --- */}
         {languages?.length > 0 && (
           <section className="flex-1 grid grid-cols-12 gap-6 bg-slate-50 p-5 rounded-2xl">
-            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-400 pt-1">
+            <h3 className="col-span-3 text-[13px] font-semibold uppercase tracking-[0.2em] text-slate-600 pt-1">
               Languages
             </h3>
             <div className="col-span-9 flex flex-col gap-3 pt-0.5">
@@ -177,7 +177,7 @@ const MinimalTemplate = ({ data }) => {
                   <span className="text-xs text-slate-800 font-semibold tracking-wide">
                     {lang.language}
                   </span>
-                  <span className="text-[10px] text-slate-500 font-light tracking-widest uppercase">
+                  <span className="text-[10px] text-slate-700 font-medium tracking-widest uppercase">
                     {lang.proficiency}
                   </span>
                 </div>

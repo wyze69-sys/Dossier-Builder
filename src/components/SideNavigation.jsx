@@ -63,10 +63,10 @@ const SideNavigation = ({ fullName }) => {
             key={item.id}
             onClick={() => handleNavClick(item.id)}
             type="button"
-            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-manrope text-xs uppercase tracking-widest font-semibold hover:translate-x-1 transition-transform duration-200 ${
+            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-manrope text-xs uppercase tracking-widest font-semibold transition-all duration-300 ease-in-out ${
               activeSection === item.id
-                ? 'bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 shadow-sm'
-                : 'text-slate-500 dark:text-slate-400 hover:bg-slate-200/50'
+                ? 'bg-primary-fixed/30 text-primary border-l-2 border-primary pl-[10px] shadow-sm'
+                : 'text-slate-500 dark:text-slate-400 hover:bg-slate-200/50 hover:translate-x-1 border-l-2 border-transparent pl-[10px]'
             }`}
           >
             <span className="material-symbols-outlined">{item.icon}</span>

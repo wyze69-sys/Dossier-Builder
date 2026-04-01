@@ -1,3 +1,5 @@
+import FormInput from './common/FormInput';
+
 const ProjectsForm = ({ projects, addEntry, removeEntry, updateEntry }) => {
   return (
     <div className="space-y-6">
@@ -33,38 +35,22 @@ const ProjectsForm = ({ projects, addEntry, removeEntry, updateEntry }) => {
             </button>
 
             <div className="grid grid-cols-1 gap-4">
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-                  Project Title
-                </label>
-                <input
-                  className="w-full h-9 px-3 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow"
-                  type="text"
-                  value={proj.title}
-                  onChange={(e) => updateEntry(proj.id, 'title', e.target.value)}
-                />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-                  Role / Contribution
-                </label>
-                <input
-                  className="w-full h-9 px-3 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow"
-                  type="text"
-                  value={proj.role}
-                  onChange={(e) => updateEntry(proj.id, 'role', e.target.value)}
-                />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-                  Description & Impact
-                </label>
-                <textarea
-                  className="w-full p-3 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow h-24 resize-none"
-                  value={proj.description}
-                  onChange={(e) => updateEntry(proj.id, 'description', e.target.value)}
-                />
-              </div>
+              <FormInput
+                label="Project Title"
+                value={proj.title}
+                onChange={(e) => updateEntry(proj.id, 'title', e.target.value)}
+              />
+              <FormInput
+                label="Role / Contribution"
+                value={proj.role}
+                onChange={(e) => updateEntry(proj.id, 'role', e.target.value)}
+              />
+              <FormInput
+                label="Description & Impact"
+                type="textarea"
+                value={proj.description}
+                onChange={(e) => updateEntry(proj.id, 'description', e.target.value)}
+              />
             </div>
           </div>
         ))}

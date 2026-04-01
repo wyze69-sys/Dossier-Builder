@@ -5,7 +5,12 @@ import EditorPanel from './components/EditorPanel';
 import PreviewPanel from './components/PreviewPanel';
 import DashboardView from './components/DashboardView';
 
-const generateId = () => crypto.randomUUID();
+const generateId = () => {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+};
 
 const initialData = {
   fullName: '',
@@ -42,7 +47,13 @@ function App() {
   const [isPreviewMode, setIsPreviewMode] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('dossier_data', JSON.stringify(resumeData));
+    // Debounce the localStorage save by 1 second to avoid UI lag/thrashing
+    const timeout = setTimeout(() => {
+      localStorage.setItem('dossier_data', JSON.stringify(resumeData));
+    }, 1000);
+    
+    // Clear timeout on every change to restart the debounce timer
+    return () => clearTimeout(timeout);
   }, [resumeData]);
 
   useEffect(() => {

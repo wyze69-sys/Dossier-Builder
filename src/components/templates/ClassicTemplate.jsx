@@ -52,7 +52,7 @@ const ClassicTemplate = ({ data }) => {
                 <div key={exp.id} className="space-y-2">
                   <div className="flex justify-between items-baseline">
                     <h4 className="font-bold text-[14px] text-black">{exp.company}</h4>
-                    <span className="text-[11px] font-semibold text-slate-500">
+                    <span className="text-[11px] font-semibold text-slate-700">
                       {exp.startYear} {(exp.startYear && (exp.endYear || exp.isCurrent)) ? '—' : ''} {exp.isCurrent ? 'Present' : exp.endYear}
                     </span>
                   </div>
@@ -105,7 +105,7 @@ const ClassicTemplate = ({ data }) => {
                     {edu.degree && <h4 className="font-bold text-[14px] text-black">{edu.degree}</h4>}
                     {edu.institution && <p className="text-[11px] text-slate-600 italic">{edu.institution}</p>}
                   </div>
-                  <div className="text-[11px] font-semibold text-slate-500">
+                  <div className="text-[11px] font-semibold text-slate-700">
                     {edu.startYear} {(edu.startYear && edu.endYear) ? '—' : ''} {edu.endYear}
                   </div>
                 </div>

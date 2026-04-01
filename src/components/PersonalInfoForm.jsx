@@ -1,3 +1,5 @@
+import FormInput from './common/FormInput';
+
 const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
   const handleChange = (field) => (e) => {
     updatePersonalInfo(field, e.target.value);
@@ -5,13 +7,37 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        updatePersonalInfo('profileImage', reader.result);
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        // Create a temporary canvas for scaling
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 400;
+        let width = img.width;
+        let height = img.height;
+
+        // Maintain aspect ratio
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Export as compressed JPEG (0.7 quality)
+        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+        updatePersonalInfo('profileImage', compressedBase64);
       };
-      reader.readAsDataURL(file);
-    }
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -24,99 +50,57 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-1.5">
-          <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-            Full Name
-          </label>
-          <input
-            className="w-full h-10 px-4 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
-            type="text"
-            value={data.fullName}
-            onChange={handleChange('fullName')}
-          />
-        </div>
-        <div className="space-y-1.5">
-          <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-            Job Title
-          </label>
-          <input
-            className="w-full h-10 px-4 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
-            type="text"
-            value={data.jobTitle}
-            onChange={handleChange('jobTitle')}
-          />
-        </div>
-        <div className="space-y-1.5">
-          <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-            Email Address
-          </label>
-          <input
-            className="w-full h-10 px-4 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
-            type="email"
-            value={data.email}
-            onChange={handleChange('email')}
-          />
-        </div>
-        <div className="space-y-1.5">
-          <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-            Phone Number
-          </label>
-          <input
-            className="w-full h-10 px-4 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
-            type="tel"
-            value={data.phone}
-            onChange={handleChange('phone')}
-          />
-        </div>
-      </div>
-
-      <div className="space-y-1.5">
-        <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-          Location / Address
-        </label>
-        <input
-          className="w-full h-10 px-4 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
-          type="text"
-          value={data.location || ''}
-          onChange={handleChange('location')}
+        <FormInput
+          label="Full Name"
+          value={data.fullName}
+          onChange={handleChange('fullName')}
+        />
+        <FormInput
+          label="Job Title"
+          value={data.jobTitle}
+          onChange={handleChange('jobTitle')}
+        />
+        <FormInput
+          label="Email Address"
+          type="email"
+          value={data.email}
+          onChange={handleChange('email')}
+        />
+        <FormInput
+          label="Phone Number"
+          type="tel"
+          value={data.phone}
+          onChange={handleChange('phone')}
         />
       </div>
+
+      <FormInput
+        label="Location / Address"
+        value={data.location || ''}
+        onChange={handleChange('location')}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-1.5">
-          <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-            LinkedIn Profile
-          </label>
-          <input
-            className="w-full h-10 px-4 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
-            type="url"
-            value={data.linkedin || ''}
-            onChange={handleChange('linkedin')}
-          />
-        </div>
-        <div className="space-y-1.5">
-          <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-            Portfolio / GitHub
-          </label>
-          <input
-            className="w-full h-10 px-4 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all"
-            type="url"
-            value={data.portfolio || ''}
-            onChange={handleChange('portfolio')}
-          />
-        </div>
-      </div>
-
-      <div className="space-y-1.5">
-        <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-          Summary
-        </label>
-        <textarea
-          className="w-full p-4 bg-surface-container-low border-none rounded-lg text-sm input-focus-glow transition-all h-32 resize-none"
-          value={data.summary || ''}
-          onChange={handleChange('summary')}
+        <FormInput
+          label="LinkedIn Profile"
+          type="url"
+          value={data.linkedin || ''}
+          onChange={handleChange('linkedin')}
+        />
+        <FormInput
+          label="Portfolio / GitHub"
+          type="url"
+          value={data.portfolio || ''}
+          onChange={handleChange('portfolio')}
         />
       </div>
+
+      <FormInput
+        label="Summary"
+        type="textarea"
+        value={data.summary || ''}
+        onChange={handleChange('summary')}
+      />
 
       {/* Photo Upload Area */}
       <div className="pt-4">

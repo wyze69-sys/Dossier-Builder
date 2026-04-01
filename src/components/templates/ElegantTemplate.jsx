@@ -27,7 +27,7 @@ const ElegantTemplate = ({ data }) => {
       {/* Secondary Top Row: Picture + Summary */}
       <div className="w-full flex gap-10 items-start mb-8">
         {data.profileImage && (
-          <div className="w-32 h-32 shrink-0 grayscale hover:grayscale-0 transition-all duration-700">
+          <div className="w-32 h-32 shrink-0 grayscale">
             <img src={data.profileImage} alt="Profile" className="w-full h-full object-cover" />
           </div>
         )}
@@ -54,7 +54,7 @@ const ElegantTemplate = ({ data }) => {
                   <div key={edu.id}>
                     <h4 className="font-serif text-[13px] font-medium text-[#2c2c2c]">{edu.degree}</h4>
                     <h5 className="font-sans text-[11px] text-[#5a5a5a] mt-1">{edu.institution}</h5>
-                    <p className="font-sans text-[9px] tracking-widest uppercase text-[#8a8a8a] mt-1">
+                    <p className="font-sans text-[9px] tracking-widest uppercase text-[#4a4a4a] mt-1">
                       {edu.startYear} — {edu.endYear}
                     </p>
                   </div>
@@ -71,7 +71,7 @@ const ElegantTemplate = ({ data }) => {
                 {data.languages.map((lang) => (
                   <div key={lang.id} className="flex justify-between items-baseline border-b border-dashed border-[#e5e5e5] pb-2">
                     <span className="font-serif text-[13px] text-[#2c2c2c]">{lang.language}</span>
-                    <span className="font-sans text-[9px] tracking-widest uppercase text-[#8a8a8a]">{lang.proficiency}</span>
+                    <span className="font-sans text-[9px] tracking-widest uppercase text-[#4a4a4a]">{lang.proficiency}</span>
                   </div>
                 ))}
               </div>
@@ -108,7 +108,7 @@ const ElegantTemplate = ({ data }) => {
                   <div key={exp.id}>
                     <div className="flex justify-between items-baseline mb-1">
                       <h4 className="font-serif text-[15px] font-medium text-[#1a1a1a]">{exp.company}</h4>
-                      <span className="font-sans text-[10px] tracking-wider uppercase text-[#8a8a8a]">
+                      <span className="font-sans text-[10px] tracking-wider uppercase text-[#4a4a4a]">
                         {exp.startYear} — {exp.isCurrent ? 'Present' : exp.endYear}
                       </span>
                     </div>

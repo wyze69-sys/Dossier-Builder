@@ -91,7 +91,7 @@ const CreativeTemplate = ({ data }) => {
                       </div>
                     </div>
                     <h5 className="text-sm font-bold text-slate-800 mb-3">{exp.company}</h5>
-                    <p className="text-[11px] text-slate-600 leading-relaxed text-justify hyphens-auto break-words">{exp.description}</p>
+                    <p className="text-[11px] text-slate-800 leading-relaxed text-justify hyphens-auto break-words">{exp.description}</p>
                   </div>
                 ))}
               </div>
@@ -110,7 +110,7 @@ const CreativeTemplate = ({ data }) => {
                   <div key={edu.id} className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100">
                     <h4 className="text-sm font-bold text-[#0f766e] leading-tight mb-1">{edu.degree}</h4>
                     <h5 className="text-xs font-semibold text-slate-600 mb-3">{edu.institution}</h5>
-                    <div className="text-[10px] font-black tracking-widest uppercase text-slate-400">
+                    <div className="text-[10px] font-black tracking-widest uppercase text-slate-700">
                       {edu.startYear} — {edu.endYear}
                     </div>
                   </div>
@@ -133,7 +133,7 @@ const CreativeTemplate = ({ data }) => {
                       <h4 className="text-sm font-bold text-[#334155]">{proj.title}</h4>
                       <span className="text-[10px] font-bold tracking-widest uppercase text-slate-500">{proj.role}</span>
                     </div>
-                    <p className="text-[11px] text-slate-600 leading-relaxed text-justify hyphens-auto break-words">{proj.description}</p>
+                    <p className="text-[11px] text-slate-800 leading-relaxed text-justify hyphens-auto break-words">{proj.description}</p>
                   </div>
                 ))}
               </div>
