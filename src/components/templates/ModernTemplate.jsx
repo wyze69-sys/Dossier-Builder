@@ -103,7 +103,7 @@ const ModernTemplate = ({ data }) => {
       {/* Main Content - Crisp White */}
       <main className="w-[70%] p-9 bg-white flex flex-col gap-5">
         {(data.fullName || data.jobTitle) && (
-          <header className="print-avoid-break mb-1">
+          <header className="resume-header print-avoid-break mb-1">
             {data.fullName && (
               <h1 className="text-[36px] font-black tracking-tighter leading-none mb-1 text-slate-900 uppercase">
                 {data.fullName}

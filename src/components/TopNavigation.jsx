@@ -23,16 +23,6 @@ const TopNavigation = ({ activeTab, setActiveTab }) => {
         >
           Editor
         </button>
-        <button
-          onClick={() => setActiveTab('resumes')}
-          className={`h-16 flex items-center transition-colors font-semibold ${
-            activeTab === 'resumes' 
-              ? 'text-blue-700 dark:text-blue-400 border-b-2 border-blue-700' 
-              : 'text-slate-500 dark:text-slate-400 hover:text-slate-900'
-          }`}
-        >
-          My Resumes
-        </button>
       </nav>
 
       {/* Action Buttons */}

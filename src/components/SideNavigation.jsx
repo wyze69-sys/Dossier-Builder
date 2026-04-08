@@ -47,7 +47,7 @@ const SideNavigation = ({ fullName }) => {
   };
 
   return (
-    <aside className="hidden lg:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 p-4 gap-2 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-r border-slate-200/60">
+    <aside className="app-side-navigation hidden lg:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 p-4 gap-2 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-r border-slate-200/60">
       {/* Section Header */}
       <div className="mb-6 px-2">
         <h2 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 font-manrope">
@@ -75,21 +75,6 @@ const SideNavigation = ({ fullName }) => {
         ))}
       </nav>
 
-      {/* User Profile Card */}
-      <div className="mt-auto p-4 bg-slate-50 border border-slate-100 rounded-xl">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
-            <span className="material-symbols-outlined text-indigo-600 text-[18px]">account_circle</span>
-          </div>
-          <div>
-            <p className="text-xs font-bold text-slate-800">{fullName || 'User'}</p>
-            <p className="text-[10px] text-slate-500">Free Plan</p>
-          </div>
-        </div>
-        <button type="button" className="w-full py-2 bg-slate-800 hover:bg-slate-900 transition-colors text-white text-[10px] font-bold uppercase tracking-widest rounded-lg">
-          Upgrade
-        </button>
-      </div>
     </aside>
   );
 };

@@ -17,7 +17,7 @@ const getRelativeTimeText = (timestamp) => {
   return `Saved on ${new Date(timestamp).toLocaleDateString()}`;
 };
 
-const PreviewPanel = ({ resumeData, saveToDashboard }) => {
+const PreviewPanel = ({ resumeData }) => {
   const [template, setTemplate] = useState('professional');
   const [scale, setScale] = useState(1);
   const [zoomOffset, setZoomOffset] = useState(0);
@@ -46,7 +46,6 @@ const PreviewPanel = ({ resumeData, saveToDashboard }) => {
   }, [resumeData]);
 
   const handleDownloadPDF = () => {
-    if (saveToDashboard) saveToDashboard();
     setLastSavedAt(Date.now());
     window.print();
   };

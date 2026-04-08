@@ -37,11 +37,15 @@ body {
     print-color-adjust: exact !important;
   }
 
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   /* Hide UI Elements during print */
   .resume-preview-controls,
   .resume-preview-footer,
-  aside, 
-  nav,
+  .app-side-navigation,
   header:not(.resume-header) {
     display: none !important;
   }

@@ -3,7 +3,6 @@ import TopNavigation from './components/TopNavigation';
 import SideNavigation from './components/SideNavigation';
 import EditorPanel from './components/EditorPanel';
 import PreviewPanel from './components/PreviewPanel';
-import DashboardView from './components/DashboardView';
 
 const generateId = () => {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) {
@@ -31,12 +30,22 @@ const initialData = {
   languages: [],
 };
 
+const isQuotaExceededError = (error) => {
+  if (!error) return false;
+  return (
+    error.name === 'QuotaExceededError' ||
+    error.name === 'NS_ERROR_DOM_QUOTA_REACHED' ||
+    error.code === 22 ||
+    error.code === 1014
+  );
+};
+
 function App() {
   const [resumeData, setResumeData] = useState(() => {
     const saved = localStorage.getItem('dossier_data');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        return { ...initialData, ...JSON.parse(saved) };
       } catch (e) {
         console.error('Failed to parse dossier_data', e);
       }
@@ -49,7 +58,15 @@ function App() {
   useEffect(() => {
     // Debounce the localStorage save by 1 second to avoid UI lag/thrashing
     const timeout = setTimeout(() => {
-      localStorage.setItem('dossier_data', JSON.stringify(resumeData));
+      try {
+        localStorage.setItem('dossier_data', JSON.stringify(resumeData));
+      } catch (error) {
+        if (isQuotaExceededError(error)) {
+          alert('Storage limit reached! Delete old resumes from the dashboard to save new ones or remove your profile photo.');
+        } else {
+          console.error('Failed to save dossier_data', error);
+        }
+      }
     }, 1000);
     
     // Clear timeout on every change to restart the debounce timer
@@ -61,6 +78,19 @@ function App() {
     window.addEventListener('toggle-preview', handleToggle);
     return () => window.removeEventListener('toggle-preview', handleToggle);
   }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      try {
+        localStorage.setItem('dossier_data', JSON.stringify(resumeData));
+      } catch (error) {
+        console.error('Failed to save dossier_data before unload', error);
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [resumeData]);
 
   // Update top-level personal info fields
   const updatePersonalInfo = (field, value) => {
@@ -146,8 +176,11 @@ function App() {
   // Add a new skill
   const addSkill = (skillString) => {
     const trimmed = skillString.trim();
-    if (trimmed && !resumeData.skills.includes(trimmed)) {
-      setResumeData(prev => ({ ...prev, skills: [...prev.skills, trimmed] }));
+    if (trimmed) {
+      setResumeData(prev => {
+        if (prev.skills.includes(trimmed)) return prev;
+        return { ...prev, skills: [...prev.skills, trimmed] };
+      });
     }
   };
 
@@ -157,31 +190,6 @@ function App() {
       ...prev,
       skills: prev.skills.filter((_, i) => i !== index)
     }));
-  };
-
-  const saveToDashboard = () => {
-    const saved = localStorage.getItem('saved_resumes');
-    let savedResumes = [];
-    if (saved) {
-      try {
-        savedResumes = JSON.parse(saved);
-      } catch (e) {
-        console.error('Failed to parse saved_resumes', e);
-      }
-    }
-    const newResume = { ...resumeData, savedAt: Date.now() };
-    savedResumes.push(newResume);
-    localStorage.setItem('saved_resumes', JSON.stringify(savedResumes));
-  };
-
-  const handleLoadResume = (resume) => {
-    if (resume) {
-      setResumeData(resume);
-    } else {
-      clearData();
-    }
-    setActiveTab('editor');
-    setIsPreviewMode(false);
   };
 
   return (
@@ -211,11 +219,9 @@ function App() {
               />
             )}
             {/* Right Panel: Resume Preview */}
-            <PreviewPanel resumeData={resumeData} saveToDashboard={saveToDashboard} />
+            <PreviewPanel resumeData={resumeData} />
           </>
         )}
-
-        {activeTab === 'resumes' && <DashboardView loadResume={handleLoadResume} />}
       </main>
     </div>
   );

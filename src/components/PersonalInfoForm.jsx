@@ -13,26 +13,42 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
     reader.onload = (event) => {
       const img = new Image();
       img.onload = () => {
-        // Create a temporary canvas for scaling
-        const canvas = document.createElement('canvas');
-        const MAX_WIDTH = 400;
-        let width = img.width;
-        let height = img.height;
+        const SIZE_LIMIT_MB = 1.5;
 
-        // Maintain aspect ratio
-        if (width > MAX_WIDTH) {
-          height *= MAX_WIDTH / width;
-          width = MAX_WIDTH;
+        const drawAndExportPng = (maxWidth) => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth) {
+            height *= maxWidth / width;
+            width = maxWidth;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          return canvas.toDataURL('image/png');
+        };
+
+        const estimateSizeMb = (base64String) => (base64String.length * 0.75) / 1024 / 1024;
+
+        let compressedBase64 = drawAndExportPng(400);
+        if (estimateSizeMb(compressedBase64) > SIZE_LIMIT_MB) {
+          compressedBase64 = drawAndExportPng(200);
         }
 
-        canvas.width = width;
-        canvas.height = height;
+        if (estimateSizeMb(compressedBase64) > SIZE_LIMIT_MB) {
+          compressedBase64 = drawAndExportPng(150);
+        }
 
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
+        if (estimateSizeMb(compressedBase64) > SIZE_LIMIT_MB) {
+          alert('Image too large for local storage. Please choose a smaller file.');
+          return;
+        }
 
-        // Export as PNG to preserve transparency
-        const compressedBase64 = canvas.toDataURL('image/png');
         updatePersonalInfo('profileImage', compressedBase64);
       };
       img.src = event.target.result;
@@ -52,24 +68,24 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <FormInput
           label="Full Name"
-          value={data.fullName}
+          value={data.fullName || ''}
           onChange={handleChange('fullName')}
         />
         <FormInput
           label="Job Title"
-          value={data.jobTitle}
+          value={data.jobTitle || ''}
           onChange={handleChange('jobTitle')}
         />
         <FormInput
           label="Email Address"
           type="email"
-          value={data.email}
+          value={data.email || ''}
           onChange={handleChange('email')}
         />
         <FormInput
           label="Phone Number"
           type="tel"
-          value={data.phone}
+          value={data.phone || ''}
           onChange={handleChange('phone')}
         />
       </div>
