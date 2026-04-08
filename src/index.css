@@ -85,3 +85,20 @@ body {
   background: #ffffff;
   box-sizing: border-box;
 }
+
+.clamp-lines-3,
+.clamp-lines-4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.clamp-lines-3 {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.clamp-lines-4 {
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}

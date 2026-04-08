@@ -11,7 +11,12 @@ const ProfessionalTemplate = ({ data }) => {
 
   return (
     <div className="w-full min-h-[1123px] bg-white text-black px-11 pt-11 pb-10 box-border" style={{ fontFamily: "'Times New Roman', Times, serif" }}>
-      <header className="resume-header text-center mb-5 print-avoid-break">
+      <header className="resume-header text-center mb-5 print-avoid-break relative">
+        {data.profileImage && (
+          <div className="absolute left-0 top-0 w-24 h-24 rounded-md overflow-hidden border border-gray-300 bg-gray-100">
+            <img src={data.profileImage} alt="Profile" className="w-full h-full object-cover" />
+          </div>
+        )}
         <h1 className="text-[32px] font-extrabold tracking-widest leading-none uppercase mb-2">{data.fullName}</h1>
         {data.jobTitle && (
           <p className="text-[14px] font-bold uppercase tracking-widest mb-1.5 text-gray-800">{data.jobTitle}</p>
@@ -43,7 +48,9 @@ const ProfessionalTemplate = ({ data }) => {
                   </p>
                 </div>
                 <p className="text-[13px] italic font-semibold mb-1">{exp.company}</p>
-                {exp.description && <p className="text-[12.5px] leading-snug text-justify text-gray-900">{exp.description}</p>}
+                {exp.description && (
+                  <p className="text-[12.5px] leading-snug text-justify text-gray-900">{exp.description}</p>
+                )}
               </article>
             ))}
           </div>

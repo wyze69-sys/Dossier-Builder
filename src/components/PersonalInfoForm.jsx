@@ -31,8 +31,8 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
 
-        // Export as compressed JPEG (0.7 quality)
-        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+        // Export as PNG to preserve transparency
+        const compressedBase64 = canvas.toDataURL('image/png');
         updatePersonalInfo('profileImage', compressedBase64);
       };
       img.src = event.target.result;
@@ -100,6 +100,8 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
         type="textarea"
         value={data.summary || ''}
         onChange={handleChange('summary')}
+        maxLength={780}
+        showCounter
       />
 
       {/* Photo Upload Area */}

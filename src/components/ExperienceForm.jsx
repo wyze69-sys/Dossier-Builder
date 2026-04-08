@@ -69,6 +69,8 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
                   type="textarea"
                   value={exp.description}
                   onChange={(e) => updateEntry(exp.id, 'description', e.target.value)}
+                  maxLength={360}
+                  showCounter
                 />
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col justify-end">

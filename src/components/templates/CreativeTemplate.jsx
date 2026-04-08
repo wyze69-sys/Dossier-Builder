@@ -11,6 +11,11 @@ const CreativeTemplate = ({ data }) => {
     <div className="w-full min-h-[1123px] h-full bg-white font-sans text-slate-900 px-7 py-8 box-border flex gap-7">
       {/* Sidebar / Left Column */}
       <aside className="w-[35%] flex flex-col gap-6">
+        {data.profileImage && (
+          <div className="print-avoid-break w-32 h-32 rounded-full overflow-hidden border-4 border-teal-500 bg-teal-50 self-center">
+            <img src={data.profileImage} alt="Profile" className="w-full h-full object-cover" />
+          </div>
+        )}
         <header className="print-avoid-break flex flex-col gap-1.5">
           <h1 className="text-[32px] font-black tracking-tight leading-none text-teal-900">{data.fullName}</h1>
           <h2 className="text-[14px] font-bold uppercase tracking-[0.15em] text-teal-600 mt-1">{data.jobTitle}</h2>
