@@ -44,7 +44,6 @@ body {
 
   /* Hide UI Elements during print */
   .resume-preview-controls,
-  .resume-preview-footer,
   .app-side-navigation,
   header:not(.resume-header) {
     display: none !important;

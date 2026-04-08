@@ -4,24 +4,10 @@ import ResumeDocument from './ResumeDocument';
 const A4_WIDTH_PX = 794;
 const A4_HEIGHT_PX = 1123;
 
-const getRelativeTimeText = (timestamp) => {
-  if (!timestamp) return 'Not saved yet';
-  const elapsedMs = Date.now() - timestamp;
-  const elapsedMinutes = Math.max(0, Math.floor(elapsedMs / 60000));
-  if (elapsedMinutes < 1) return 'Saved just now';
-  if (elapsedMinutes === 1) return 'Saved 1 minute ago';
-  if (elapsedMinutes < 60) return `Saved ${elapsedMinutes} minutes ago`;
-  const elapsedHours = Math.floor(elapsedMinutes / 60);
-  if (elapsedHours === 1) return 'Saved 1 hour ago';
-  if (elapsedHours < 24) return `Saved ${elapsedHours} hours ago`;
-  return `Saved on ${new Date(timestamp).toLocaleDateString()}`;
-};
-
 const PreviewPanel = ({ resumeData }) => {
   const [template, setTemplate] = useState('professional');
   const [scale, setScale] = useState(1);
   const [zoomOffset, setZoomOffset] = useState(0);
-  const [lastSavedAt, setLastSavedAt] = useState(Date.now());
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -41,12 +27,7 @@ const PreviewPanel = ({ resumeData }) => {
     return () => window.removeEventListener('resize', calculateScale);
   }, []);
 
-  useEffect(() => {
-    setLastSavedAt(Date.now());
-  }, [resumeData]);
-
   const handleDownloadPDF = () => {
-    setLastSavedAt(Date.now());
     window.print();
   };
 
@@ -103,11 +84,6 @@ const PreviewPanel = ({ resumeData }) => {
           <ResumeDocument data={resumeData} template={template} />
         </div>
       </div>
-
-      <footer className="resume-preview-footer mt-8 text-xs text-slate-400 flex items-center gap-2">
-        <span className="material-symbols-outlined text-[16px]">lock</span>
-        {getRelativeTimeText(lastSavedAt)}
-      </footer>
     </section>
   );
 };
