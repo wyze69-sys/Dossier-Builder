@@ -4,7 +4,7 @@ const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
   return (
     <div className="space-y-6">
       {/* Section Header */}
-      <div className="flex flex-col gap-3 px-1 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-between px-1">
         <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-primary flex items-center gap-2">
           <span className="material-symbols-outlined text-[18px]">school</span>
           Education
@@ -12,7 +12,7 @@ const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
         <button
           type="button"
           onClick={addEntry}
-          className="self-start text-xs font-bold text-primary hover:underline flex items-center gap-1"
+          className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
         >
           <span className="material-symbols-outlined text-[18px]">add</span> Add Degree
         </button>
@@ -40,13 +40,13 @@ const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
           education.map((edu) => (
             <div
               key={edu.id}
-              className="bg-surface-container-lowest rounded-xl p-5 ambient-shadow relative group fade-slide-in sm:p-6"
+              className="bg-surface-container-lowest rounded-xl p-6 ambient-shadow relative group fade-slide-in"
             >
               {/* Delete Button */}
               <button
                 type="button"
                 onClick={() => removeEntry(edu.id)}
-                className="absolute top-4 right-4 text-outline hover:text-error transition-colors opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+                className="absolute top-4 right-4 text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"
               >
                 <span className="material-symbols-outlined text-[20px]">close</span>
               </button>
@@ -64,7 +64,7 @@ const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
                   value={edu.degree}
                   onChange={(e) => updateEntry(edu.id, 'degree', e.target.value)}
                 />
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div className="grid grid-cols-2 gap-3">
                   <FormInput
                     label="Start"
                     value={edu.startYear}

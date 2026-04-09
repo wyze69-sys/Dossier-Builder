@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 const LanguagesForm = ({ data = [], addEntry, removeEntry, updateEntry }) => {
   return (
-    <div className="bg-surface-container-lowest rounded-xl p-5 ambient-shadow space-y-6 fade-slide-in mt-6 sm:p-8">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <div className="bg-surface-container-lowest rounded-xl p-8 ambient-shadow space-y-6 fade-slide-in mt-6">
+      <div className="flex items-center justify-between">
         <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-primary flex items-center gap-2">
           <span className="material-symbols-outlined text-[18px]">translate</span>
           Languages
@@ -11,7 +11,7 @@ const LanguagesForm = ({ data = [], addEntry, removeEntry, updateEntry }) => {
         <button
           type="button"
           onClick={() => addEntry('languages')}
-          className="flex self-start items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold text-primary transition-colors hover:bg-primary-fixed"
+          className="flex items-center gap-1.5 text-xs font-bold text-primary hover:bg-primary-fixed rounded-lg px-3 py-1.5 transition-colors"
         >
           <span className="material-symbols-outlined text-[16px]">add</span>
           ADD LANGUAGE
@@ -20,7 +20,7 @@ const LanguagesForm = ({ data = [], addEntry, removeEntry, updateEntry }) => {
 
       <div className="space-y-6">
         {data.map((lang, index) => (
-          <div key={lang.id} className="relative bg-surface p-5 rounded-xl border border-outline-variant/30 slide-in sm:p-6" style={{ animationDelay: `${index * 50}ms` }}>
+          <div key={lang.id} className="relative bg-surface p-6 rounded-xl border border-outline-variant/30 slide-in" style={{ animationDelay: `${index * 50}ms` }}>
             <button
               type="button"
               onClick={() => removeEntry('languages', lang.id)}
@@ -29,7 +29,7 @@ const LanguagesForm = ({ data = [], addEntry, removeEntry, updateEntry }) => {
               <span className="material-symbols-outlined text-[20px]">close</span>
             </button>
 
-            <div className="grid grid-cols-1 gap-6 pr-0 md:grid-cols-2 sm:pr-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pr-8">
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
                   Language Name

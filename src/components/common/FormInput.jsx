@@ -8,11 +8,9 @@ const FormInput = ({ label, value, onChange, type = "text", placeholder = "", ma
 
   return (
     <div className="space-y-1.5 w-full">
-      {label ? (
-        <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
-          {label}
-        </label>
-      ) : null}
+      <label className="text-[11px] font-bold uppercase text-on-surface-variant tracking-wider ml-1">
+        {label}
+      </label>
       {isTextarea ? (
         <textarea
           className={`${commonClasses} p-4 h-24 resize-none`}
