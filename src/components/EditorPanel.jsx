@@ -17,23 +17,23 @@ const EditorPanel = ({
   clearData
 }) => {
   return (
-    <section id="editor-scroll-container" className="flex-1 overflow-visible bg-surface-container-low/50 p-4 smooth-scroll sm:p-6 md:overflow-y-auto md:p-10">
+    <section id="editor-scroll-container" className="flex-1 overflow-y-auto p-6 md:p-10 space-y-10 bg-surface-container-low/50 smooth-scroll">
       <div className="max-w-2xl mx-auto space-y-12 pb-20">
         {/* Section Header */}
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex items-start justify-between">
           <div className="space-y-1">
-            <h1 className="text-2xl font-extrabold text-on-surface font-manrope tracking-tight sm:text-3xl">
+            <h1 className="text-3xl font-extrabold text-on-surface font-manrope tracking-tight">
               Craft Your Profile
             </h1>
             <p className="text-on-surface-variant text-sm">
               Every detail counts in the architectural dossier of your career.
             </p>
           </div>
-          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+          <div className="flex items-center gap-3">
             <button
               type="button"
               onClick={clearData}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-red-50 px-4 py-2 text-xs font-semibold text-red-600 transition-colors hover:bg-red-100 sm:w-auto"
+              className="px-4 py-2 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors flex items-center gap-2"
             >
               <span className="material-symbols-outlined text-[16px]">delete</span>
               Clear Data
@@ -41,7 +41,7 @@ const EditorPanel = ({
             <button
               type="button"
               onClick={fillExampleData}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-50 px-4 py-2 text-xs font-semibold text-indigo-700 transition-colors hover:bg-indigo-100 sm:w-auto"
+              className="px-4 py-2 text-xs font-semibold text-indigo-700 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors flex items-center gap-2"
             >
               <span className="material-symbols-outlined text-[16px]">magic_button</span>
               Fill with Example

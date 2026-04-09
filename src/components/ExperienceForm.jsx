@@ -4,7 +4,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
   return (
     <div className="space-y-6">
       {/* Section Header */}
-      <div className="flex flex-col gap-3 px-1 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex items-center justify-between px-1">
         <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-primary flex items-center gap-2">
           <span className="material-symbols-outlined text-[18px]">work</span>
           Professional Experience
@@ -12,7 +12,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
         <button
           type="button"
           onClick={addEntry}
-          className="self-start text-xs font-bold text-primary hover:underline flex items-center gap-1"
+          className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
         >
           <span className="material-symbols-outlined text-[18px]">add</span> Add Role
         </button>
@@ -40,13 +40,13 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
           experience.map((exp) => (
             <div
               key={exp.id}
-              className="bg-surface-container-lowest rounded-xl p-5 ambient-shadow relative group fade-slide-in sm:p-6"
+              className="bg-surface-container-lowest rounded-xl p-6 ambient-shadow relative group fade-slide-in"
             >
               {/* Delete Button */}
               <button
                 type="button"
                 onClick={() => removeEntry(exp.id)}
-                className="absolute top-4 right-4 text-outline hover:text-error transition-colors opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+                className="absolute top-4 right-4 text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"
               >
                 <span className="material-symbols-outlined text-[20px]">close</span>
               </button>
@@ -72,7 +72,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
                   maxLength={360}
                   showCounter
                 />
-                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col justify-end">
                     <FormInput
                       label="Start Year"
@@ -81,7 +81,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
                     />
                   </div>
                   <div className="space-y-1.5 flex flex-col justify-end">
-                    <div className="mb-1 ml-1 flex items-start gap-2">
+                    <div className="flex items-center gap-2 mb-1 ml-1">
                       <input
                         type="checkbox"
                         id={`current-${exp.id}`}
@@ -89,7 +89,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
                         onChange={(e) => updateEntry(exp.id, 'isCurrent', e.target.checked)}
                         className="w-3.5 h-3.5 rounded border-outline text-primary focus:ring-primary"
                       />
-                      <label htmlFor={`current-${exp.id}`} className="cursor-pointer text-[10px] font-bold uppercase leading-4 tracking-wider text-on-surface-variant">
+                      <label htmlFor={`current-${exp.id}`} className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider cursor-pointer">
                         I currently work here
                       </label>
                     </div>

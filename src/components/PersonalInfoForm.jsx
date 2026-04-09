@@ -57,8 +57,8 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
   };
 
   return (
-    <div className="bg-surface-container-lowest rounded-xl p-5 ambient-shadow space-y-6 fade-slide-in sm:p-8">
-      <div className="flex items-start justify-between">
+    <div className="bg-surface-container-lowest rounded-xl p-8 ambient-shadow space-y-6 fade-slide-in">
+      <div className="flex items-center justify-between">
         <h3 className="text-sm font-bold uppercase tracking-[0.15em] text-primary flex items-center gap-2">
           <span className="material-symbols-outlined text-[18px]">person</span>
           Personal Information

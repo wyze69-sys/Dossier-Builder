@@ -195,39 +195,31 @@ function App() {
   return (
     <div className="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
       {/* Top Navigation */}
-      <TopNavigation
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        isPreviewMode={isPreviewMode}
-      />
+      <TopNavigation activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* Conditional Side Navigation (only show in Editor) */}
       {activeTab === 'editor' && !isPreviewMode && <SideNavigation fullName={resumeData.fullName} />}
 
       {/* Main Content Canvas */}
-      <main className={`${activeTab === 'editor' && !isPreviewMode ? 'lg:ml-64' : ''} flex flex-col bg-surface transition-all duration-300 md:h-[calc(100dvh-4rem)] md:flex-row md:overflow-hidden`}>
+      <main className={`${activeTab === 'editor' && !isPreviewMode ? 'lg:ml-64' : ''} pt-16 h-screen flex flex-col md:flex-row overflow-hidden bg-surface transition-all duration-300`}>
         {activeTab === 'editor' && (
           <>
             {/* Left Panel: Form Editor */}
             {!isPreviewMode && (
-              <div className="min-h-0 md:flex-1">
-                <EditorPanel 
-                  resumeData={resumeData} 
-                  updatePersonalInfo={updatePersonalInfo}
-                  addEntry={addEntry}
-                  removeEntry={removeEntry}
-                  updateEntry={updateEntry}
-                  addSkill={addSkill}
-                  removeSkill={removeSkill}
-                  fillExampleData={fillExampleData}
-                  clearData={clearData}
-                />
-              </div>
+              <EditorPanel 
+                resumeData={resumeData} 
+                updatePersonalInfo={updatePersonalInfo}
+                addEntry={addEntry}
+                removeEntry={removeEntry}
+                updateEntry={updateEntry}
+                addSkill={addSkill}
+                removeSkill={removeSkill}
+                fillExampleData={fillExampleData}
+                clearData={clearData}
+              />
             )}
             {/* Right Panel: Resume Preview */}
-            <div className={`${isPreviewMode ? 'block' : 'hidden md:block'} min-h-0 md:flex-1`}>
-              <PreviewPanel resumeData={resumeData} />
-            </div>
+            <PreviewPanel resumeData={resumeData} />
           </>
         )}
       </main>
