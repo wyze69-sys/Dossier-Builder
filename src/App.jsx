@@ -20,7 +20,7 @@ function AppLayout() {
   };
 
   return (
-    <div className="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <div className="bg-surface dark:bg-slate-900 selection:bg-primary-fixed selection:text-on-primary-fixed">
       <TopNavigation
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -28,7 +28,7 @@ function AppLayout() {
         onTogglePreview={handleTogglePreview}
       />
       {activeTab === 'editor' && !isPreviewMode && <SideNavigation />}
-      <main className={`${activeTab === 'editor' && !isPreviewMode ? 'lg:ml-64' : ''} pt-16 h-screen flex flex-col md:flex-row overflow-hidden bg-surface transition-all duration-300`}>
+      <main className={`${activeTab === 'editor' && !isPreviewMode ? 'lg:ml-64' : ''} pt-16 h-screen flex flex-col md:flex-row overflow-hidden bg-surface dark:bg-slate-800 transition-all duration-300`}>
         {activeTab === 'editor' && (
           <>
             {!isPreviewMode && <EditorPanel />}

@@ -84,12 +84,20 @@ const PersonalInfoForm = () => {
           type="email"
           value={data.email || ''}
           onChange={handleChange('email')}
+          validate={(val) => {
+            if (!val) return null;
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) ? null : 'Please enter a valid email address';
+          }}
         />
         <FormInput
           label="Phone Number"
           type="tel"
           value={data.phone || ''}
           onChange={handleChange('phone')}
+          validate={(val) => {
+            if (!val) return null;
+            return val.replace(/\D/g, '').length >= 7 ? null : 'Please enter a valid phone number';
+          }}
         />
       </div>
 
@@ -105,12 +113,20 @@ const PersonalInfoForm = () => {
           type="url"
           value={data.linkedin || ''}
           onChange={handleChange('linkedin')}
+          validate={(val) => {
+            if (!val) return null;
+            return val.toLowerCase().includes('linkedin') ? null : 'This does not look like a LinkedIn URL';
+          }}
         />
         <FormInput
           label="Portfolio / GitHub"
           type="url"
           value={data.portfolio || ''}
           onChange={handleChange('portfolio')}
+          validate={(val) => {
+            if (!val) return null;
+            return val.includes('.') ? null : 'Please enter a valid URL';
+          }}
         />
       </div>
 

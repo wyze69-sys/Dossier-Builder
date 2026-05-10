@@ -1,4 +1,19 @@
+import { useState, useEffect } from 'react';
+
 const TopNavigation = ({ activeTab, setActiveTab, onDownloadPDF, onTogglePreview }) => {
+  const [isDark, setIsDark] = useState(() => localStorage.getItem('theme') === 'dark');
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDark);
+  }, [isDark]);
+
+  const toggleDark = () => {
+    const next = !isDark;
+    setIsDark(next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
+    document.documentElement.classList.toggle('dark', next);
+  };
+
   return (
     <header className="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-sm dark:shadow-none transition-colors">
       {/* Logo & Badge */}
@@ -34,6 +49,16 @@ const TopNavigation = ({ activeTab, setActiveTab, onDownloadPDF, onTogglePreview
         >
           <span className="material-symbols-outlined text-[20px]">visibility</span>
           Live Preview
+        </button>
+        <button
+          type="button"
+          onClick={toggleDark}
+          className="w-9 h-9 flex items-center justify-center rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          aria-label="Toggle dark mode"
+        >
+          <span className="material-symbols-outlined text-[20px]">
+            {isDark ? 'light_mode' : 'dark_mode'}
+          </span>
         </button>
         <button
           type="button"
