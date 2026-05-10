@@ -1,12 +1,13 @@
-import { useRef } from 'react';
-import { ResumeProvider, useResume } from './context/ResumeContext';
+import { useRef, useState } from 'react';
+import { ResumeProvider } from './context/ResumeContext';
 import TopNavigation from './components/TopNavigation';
 import SideNavigation from './components/SideNavigation';
 import EditorPanel from './components/EditorPanel';
 import PreviewPanel from './components/PreviewPanel';
 
 function AppLayout() {
-  const { activeTab, setActiveTab, isPreviewMode, setIsPreviewMode } = useResume();
+  const [activeTab, setActiveTab] = useState('editor');
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
   const previewRef = useRef(null);
 
   const handleDownloadPDF = () => {

@@ -1,18 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useResume } from '../context/ResumeContext';
 
 const TopNavigation = ({ activeTab, setActiveTab, onDownloadPDF, onTogglePreview }) => {
-  const [isDark, setIsDark] = useState(() => localStorage.getItem('theme') === 'dark');
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDark);
-  }, [isDark]);
-
-  const toggleDark = () => {
-    const next = !isDark;
-    setIsDark(next);
-    localStorage.setItem('theme', next ? 'dark' : 'light');
-    document.documentElement.classList.toggle('dark', next);
-  };
+  const { isDark, toggleDark } = useResume();
 
   return (
     <header className="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-sm dark:shadow-none transition-colors">

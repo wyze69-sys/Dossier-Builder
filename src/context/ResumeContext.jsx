@@ -97,7 +97,16 @@ function resumeReducer(state, action) {
         languages: exampleData.languages.map(e => ({ ...e, id: generateId() })),
       };
     case 'CLEAR_DATA':
-      return initialData;
+      return {
+        ...initialData,
+        education: [],
+        experience: [],
+        skills: [],
+        projects: [],
+        expertise: [],
+        keywords: [],
+        languages: [],
+      };
     default:
       return state;
   }
@@ -114,8 +123,17 @@ export function ResumeProvider({ children }) {
     return initialData;
   });
 
-  const [activeTab, setActiveTab] = useState('editor');
-  const [isPreviewMode, setIsPreviewMode] = useState(false);
+  const [isDark, setIsDark] = useState(() => localStorage.getItem('theme') === 'dark');
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', isDark);
+  }, [isDark]);
+
+  const toggleDark = () => {
+    const next = !isDark;
+    setIsDark(next);
+    localStorage.setItem('theme', next ? 'dark' : 'light');
+  };
 
   // Debounced localStorage save
   useEffect(() => {
@@ -154,8 +172,7 @@ export function ResumeProvider({ children }) {
 
   const value = {
     resumeData,
-    activeTab, setActiveTab,
-    isPreviewMode, setIsPreviewMode,
+    isDark, toggleDark,
     updatePersonalInfo,
     addEntry, removeEntry, updateEntry,
     addSkill, removeSkill,

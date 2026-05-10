@@ -115,7 +115,14 @@ const PersonalInfoForm = () => {
           onChange={handleChange('linkedin')}
           validate={(val) => {
             if (!val) return null;
-            return val.toLowerCase().includes('linkedin') ? null : 'This does not look like a LinkedIn URL';
+            try {
+              const url = new URL(val.startsWith('http') ? val : `https://${val}`);
+              return (url.hostname.endsWith('linkedin.com') || url.hostname === 'lnkd.in')
+                ? null
+                : 'This does not look like a LinkedIn URL';
+            } catch {
+              return 'This does not look like a LinkedIn URL';
+            }
           }}
         />
         <FormInput
@@ -125,7 +132,12 @@ const PersonalInfoForm = () => {
           onChange={handleChange('portfolio')}
           validate={(val) => {
             if (!val) return null;
-            return val.includes('.') ? null : 'Please enter a valid URL';
+            try {
+              new URL(val.startsWith('http') ? val : `https://${val}`);
+              return null;
+            } catch {
+              return 'Please enter a valid URL';
+            }
           }}
         />
       </div>

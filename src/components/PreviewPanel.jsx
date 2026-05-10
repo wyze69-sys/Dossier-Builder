@@ -13,7 +13,9 @@ const PreviewPanel = forwardRef((props, ref) => {
   const [scale, setScale] = useState(1);
   const [zoomOffset, setZoomOffset] = useState(0);
   const [isExporting, setIsExporting] = useState(false);
+  const [isCapturing, setIsCapturing] = useState(false);
   const containerRef = useRef(null);
+  const exportTargetRef = useRef(null);
 
   useEffect(() => {
     const calculateScale = () => {
@@ -34,10 +36,13 @@ const PreviewPanel = forwardRef((props, ref) => {
   }, []);
 
   const handleDownloadPDF = async () => {
-    const element = document.getElementById('resume-pdf-target');
-    if (!element) return;
     setIsExporting(true);
+    setIsCapturing(true);
+    // Wait for React to render the off-screen capture element
+    await new Promise(r => setTimeout(r, 100));
     try {
+      const element = exportTargetRef.current;
+      if (!element) throw new Error('Export target not found');
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
@@ -52,6 +57,7 @@ const PreviewPanel = forwardRef((props, ref) => {
       console.error('PDF export failed:', err);
     } finally {
       setIsExporting(false);
+      setIsCapturing(false);
     }
   };
 
@@ -107,6 +113,23 @@ const PreviewPanel = forwardRef((props, ref) => {
           <ResumeDocument data={resumeData} template={template} />
         </div>
       </div>
+
+      {isCapturing && (
+        <div
+          ref={exportTargetRef}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: '-9999px',
+            width: '794px',
+            minHeight: '1123px',
+            background: '#ffffff',
+            zIndex: -1,
+          }}
+        >
+          <ResumeDocument data={resumeData} template={template} />
+        </div>
+      )}
     </section>
   );
 });
