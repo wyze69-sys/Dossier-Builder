@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import ResumeDocument from './ResumeDocument';
 
 const A4_WIDTH_PX = 794;
@@ -8,6 +10,7 @@ const PreviewPanel = ({ resumeData }) => {
   const [template, setTemplate] = useState('professional');
   const [scale, setScale] = useState(1);
   const [zoomOffset, setZoomOffset] = useState(0);
+  const [isExporting, setIsExporting] = useState(false);
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -27,14 +30,27 @@ const PreviewPanel = ({ resumeData }) => {
     return () => window.removeEventListener('resize', calculateScale);
   }, []);
 
-  const handleDownloadPDF = () => {
-    window.print();
+  const handleDownloadPDF = async () => {
+    const element = document.getElementById('resume-pdf-target');
+    if (!element) return;
+    setIsExporting(true);
+    try {
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+      });
+      const imgData = canvas.toDataURL('image/jpeg', 0.98);
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+      pdf.save('resume.pdf');
+    } catch (err) {
+      console.error('PDF export failed:', err);
+    } finally {
+      setIsExporting(false);
+    }
   };
-
-  useEffect(() => {
-    window.addEventListener('download-pdf', handleDownloadPDF);
-    return () => window.removeEventListener('download-pdf', handleDownloadPDF);
-  }, []);
 
   return (
     <section ref={containerRef} className="flex-1 overflow-y-auto p-6 md:p-10 bg-white flex flex-col items-center">
