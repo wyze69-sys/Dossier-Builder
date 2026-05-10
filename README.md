@@ -7,10 +7,9 @@ Dossier Builder moves beyond the generic "web form" aesthetic. It treats your pr
 
 ##  Features
 
-*   **6 Distinct High-End Templates:** Choose from Modern, Professional, Classic, Minimal, Creative, and Elegant to match your industry and persona.
+*   **3 Distinct High-End Templates:** Choose from Modern, Professional, and Creative to match your industry and persona.
 *   **Live Preview Mode:** Toggle a full-screen, distraction-free preview of your A4 canvas at any time.
-*   **High-Resolution PDF Export:** Built-in PDF generation strictly scales and captures your resume at perfect A4 dimensions without scrollbar artifacts or blurry text.
-*   **"My Resumes" Dashboard:** Automatic local-storage saves allow you to manage multiple dossiers over time.
+*   **High-Resolution PDF Export:** Powered by html2canvas + jsPDF, captures the A4 canvas at 2x scale for crisp, print-ready output. Downloads as `resume.pdf`.
 *   **Smart Canvas Scaling:** The editor workspace automatically scales the A4 paper to fit your exact screen width, ensuring perfect readability while you type.
 *   **Robust Data Fields:** Supports profile images, multi-language proficiencies, dynamic skill tagging, and granular experience/project timelines.
 

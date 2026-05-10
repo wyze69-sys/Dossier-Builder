@@ -1,6 +1,10 @@
 import FormInput from './common/FormInput';
+import { useResume } from '../context/ResumeContext';
 
-const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
+const EducationForm = () => {
+  const { resumeData, addEntry: addEntryAction, removeEntry: removeEntryAction, updateEntry: updateEntryAction } = useResume();
+  const education = resumeData.education;
+
   return (
     <div className="space-y-6">
       {/* Section Header */}
@@ -11,7 +15,7 @@ const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
         </h3>
         <button
           type="button"
-          onClick={addEntry}
+          onClick={() => addEntryAction('education')}
           className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
         >
           <span className="material-symbols-outlined text-[18px]">add</span> Add Degree
@@ -29,7 +33,7 @@ const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
             </div>
             <button
               type="button"
-              onClick={addEntry}
+              onClick={() => addEntryAction('education')}
               className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:opacity-90 transition-all duration-300 shadow-sm"
             >
               <span className="material-symbols-outlined text-[16px]">add</span>
@@ -45,7 +49,7 @@ const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
               {/* Delete Button */}
               <button
                 type="button"
-                onClick={() => removeEntry(edu.id)}
+                onClick={() => removeEntryAction('education', edu.id)}
                 className="absolute top-4 right-4 text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"
               >
                 <span className="material-symbols-outlined text-[20px]">close</span>
@@ -56,24 +60,24 @@ const EducationForm = ({ education, addEntry, removeEntry, updateEntry }) => {
                   <FormInput
                     label="Institution"
                     value={edu.institution}
-                    onChange={(e) => updateEntry(edu.id, 'institution', e.target.value)}
+                    onChange={(e) => updateEntryAction('education', edu.id, 'institution', e.target.value)}
                   />
                 </div>
                 <FormInput
                   label="Degree"
                   value={edu.degree}
-                  onChange={(e) => updateEntry(edu.id, 'degree', e.target.value)}
+                  onChange={(e) => updateEntryAction('education', edu.id, 'degree', e.target.value)}
                 />
                 <div className="grid grid-cols-2 gap-3">
                   <FormInput
                     label="Start"
                     value={edu.startYear}
-                    onChange={(e) => updateEntry(edu.id, 'startYear', e.target.value)}
+                    onChange={(e) => updateEntryAction('education', edu.id, 'startYear', e.target.value)}
                   />
                   <FormInput
                     label="End"
                     value={edu.endYear}
-                    onChange={(e) => updateEntry(edu.id, 'endYear', e.target.value)}
+                    onChange={(e) => updateEntryAction('education', edu.id, 'endYear', e.target.value)}
                   />
                 </div>
               </div>

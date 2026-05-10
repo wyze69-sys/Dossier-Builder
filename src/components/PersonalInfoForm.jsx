@@ -1,6 +1,9 @@
 import FormInput from './common/FormInput';
+import { useResume } from '../context/ResumeContext';
 
-const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
+const PersonalInfoForm = () => {
+  const { resumeData: data, updatePersonalInfo } = useResume();
+
   const handleChange = (field) => (e) => {
     updatePersonalInfo(field, e.target.value);
   };
@@ -81,12 +84,20 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
           type="email"
           value={data.email || ''}
           onChange={handleChange('email')}
+          validate={(val) => {
+            if (!val) return null;
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) ? null : 'Please enter a valid email address';
+          }}
         />
         <FormInput
           label="Phone Number"
           type="tel"
           value={data.phone || ''}
           onChange={handleChange('phone')}
+          validate={(val) => {
+            if (!val) return null;
+            return val.replace(/\D/g, '').length >= 7 ? null : 'Please enter a valid phone number';
+          }}
         />
       </div>
 
@@ -102,12 +113,32 @@ const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
           type="url"
           value={data.linkedin || ''}
           onChange={handleChange('linkedin')}
+          validate={(val) => {
+            if (!val) return null;
+            try {
+              const url = new URL(val.startsWith('http') ? val : `https://${val}`);
+              return (url.hostname.endsWith('linkedin.com') || url.hostname === 'lnkd.in')
+                ? null
+                : 'This does not look like a LinkedIn URL';
+            } catch {
+              return 'This does not look like a LinkedIn URL';
+            }
+          }}
         />
         <FormInput
           label="Portfolio / GitHub"
           type="url"
           value={data.portfolio || ''}
           onChange={handleChange('portfolio')}
+          validate={(val) => {
+            if (!val) return null;
+            try {
+              new URL(val.startsWith('http') ? val : `https://${val}`);
+              return null;
+            } catch {
+              return 'Please enter a valid URL';
+            }
+          }}
         />
       </div>
 

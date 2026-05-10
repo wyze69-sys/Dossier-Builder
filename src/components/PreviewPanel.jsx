@@ -1,14 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import ResumeDocument from './ResumeDocument';
+import { useResume } from '../context/ResumeContext';
 
 const A4_WIDTH_PX = 794;
 const A4_HEIGHT_PX = 1123;
 
-const PreviewPanel = ({ resumeData }) => {
+const PreviewPanel = forwardRef((props, ref) => {
+  const { resumeData } = useResume();
   const [template, setTemplate] = useState('professional');
   const [scale, setScale] = useState(1);
   const [zoomOffset, setZoomOffset] = useState(0);
+  const [isExporting, setIsExporting] = useState(false);
+  const [isCapturing, setIsCapturing] = useState(false);
   const containerRef = useRef(null);
+  const exportTargetRef = useRef(null);
 
   useEffect(() => {
     const calculateScale = () => {
@@ -18,8 +25,9 @@ const PreviewPanel = ({ resumeData }) => {
       const availableHeight = container.clientHeight - 48;
       const widthScale = availableWidth / A4_WIDTH_PX;
       const heightScale = availableHeight / A4_HEIGHT_PX;
-      const newScale = Math.min(widthScale, heightScale, 1.2); 
+      const newScale = Math.min(widthScale, heightScale, 1.2);
       setScale(newScale > 0 ? newScale : 1);
+      setZoomOffset(0); // reset zoom offset on resize
     };
 
     calculateScale();
@@ -27,21 +35,42 @@ const PreviewPanel = ({ resumeData }) => {
     return () => window.removeEventListener('resize', calculateScale);
   }, []);
 
-  const handleDownloadPDF = () => {
-    window.print();
+  const handleDownloadPDF = async () => {
+    setIsExporting(true);
+    setIsCapturing(true);
+    // Wait for React to render the off-screen capture element
+    await new Promise(r => setTimeout(r, 100));
+    try {
+      const element = exportTargetRef.current;
+      if (!element) throw new Error('Export target not found');
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+      });
+      const imgData = canvas.toDataURL('image/jpeg', 0.98);
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+      pdf.save('resume.pdf');
+    } catch (err) {
+      console.error('PDF export failed:', err);
+    } finally {
+      setIsExporting(false);
+      setIsCapturing(false);
+    }
   };
 
-  useEffect(() => {
-    window.addEventListener('download-pdf', handleDownloadPDF);
-    return () => window.removeEventListener('download-pdf', handleDownloadPDF);
-  }, []);
+  useImperativeHandle(ref, () => ({
+    triggerDownload: handleDownloadPDF,
+  }));
 
   return (
     <section ref={containerRef} className="flex-1 overflow-y-auto p-6 md:p-10 bg-white flex flex-col items-center">
       <div className="resume-preview-controls w-full max-w-[794px] mb-8 flex items-center justify-between">
         <div className="bg-white shadow-sm p-1 rounded-xl flex items-center gap-1 overflow-x-auto">
           {['professional', 'modern', 'creative'].map(t => (
-            <button 
+            <button
               key={t}
               type="button"
               onClick={() => setTemplate(t)}
@@ -53,8 +82,8 @@ const PreviewPanel = ({ resumeData }) => {
         </div>
 
         <div className="flex items-center gap-1 bg-white shadow-sm p-1 rounded-lg">
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={() => setZoomOffset(prev => prev - 0.1)}
             className="w-7 h-7 flex items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 transition-colors"
           >
@@ -63,8 +92,8 @@ const PreviewPanel = ({ resumeData }) => {
           <span className="text-xs font-bold text-slate-600 min-w-[40px] text-center">
             {Math.round(Math.max(0.2, scale + zoomOffset) * 100)}%
           </span>
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={() => setZoomOffset(prev => prev + 0.1)}
             className="w-7 h-7 flex items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 transition-colors"
           >
@@ -84,8 +113,28 @@ const PreviewPanel = ({ resumeData }) => {
           <ResumeDocument data={resumeData} template={template} />
         </div>
       </div>
+
+      {isCapturing && (
+        <div
+          ref={exportTargetRef}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: '-9999px',
+            width: '794px',
+            height: '1123px',
+            overflow: 'hidden',
+            background: '#ffffff',
+            zIndex: -1,
+          }}
+        >
+          <ResumeDocument data={resumeData} template={template} />
+        </div>
+      )}
     </section>
   );
-};
+});
+
+PreviewPanel.displayName = 'PreviewPanel';
 
 export default PreviewPanel;

@@ -1,6 +1,10 @@
 import FormInput from './common/FormInput';
+import { useResume } from '../context/ResumeContext';
 
-const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
+const ExperienceForm = () => {
+  const { resumeData, addEntry: addEntryAction, removeEntry: removeEntryAction, updateEntry: updateEntryAction } = useResume();
+  const experience = resumeData.experience;
+
   return (
     <div className="space-y-6">
       {/* Section Header */}
@@ -11,7 +15,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
         </h3>
         <button
           type="button"
-          onClick={addEntry}
+          onClick={() => addEntryAction('experience')}
           className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
         >
           <span className="material-symbols-outlined text-[18px]">add</span> Add Role
@@ -29,7 +33,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
             </div>
             <button
               type="button"
-              onClick={addEntry}
+              onClick={() => addEntryAction('experience')}
               className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:opacity-90 transition-all duration-300 shadow-sm"
             >
               <span className="material-symbols-outlined text-[16px]">add</span>
@@ -45,7 +49,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
               {/* Delete Button */}
               <button
                 type="button"
-                onClick={() => removeEntry(exp.id)}
+                onClick={() => removeEntryAction('experience', exp.id)}
                 className="absolute top-4 right-4 text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"
               >
                 <span className="material-symbols-outlined text-[20px]">close</span>
@@ -56,19 +60,19 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
                   <FormInput
                     label="Company"
                     value={exp.company}
-                    onChange={(e) => updateEntry(exp.id, 'company', e.target.value)}
+                    onChange={(e) => updateEntryAction('experience', exp.id, 'company', e.target.value)}
                   />
                   <FormInput
                     label="Role"
                     value={exp.role}
-                    onChange={(e) => updateEntry(exp.id, 'role', e.target.value)}
+                    onChange={(e) => updateEntryAction('experience', exp.id, 'role', e.target.value)}
                   />
                 </div>
                 <FormInput
                   label="Description"
                   type="textarea"
                   value={exp.description}
-                  onChange={(e) => updateEntry(exp.id, 'description', e.target.value)}
+                  onChange={(e) => updateEntryAction('experience', exp.id, 'description', e.target.value)}
                   maxLength={360}
                   showCounter
                 />
@@ -77,7 +81,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
                     <FormInput
                       label="Start Year"
                       value={exp.startYear}
-                      onChange={(e) => updateEntry(exp.id, 'startYear', e.target.value)}
+                      onChange={(e) => updateEntryAction('experience', exp.id, 'startYear', e.target.value)}
                     />
                   </div>
                   <div className="space-y-1.5 flex flex-col justify-end">
@@ -86,7 +90,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
                         type="checkbox"
                         id={`current-${exp.id}`}
                         checked={exp.isCurrent || false}
-                        onChange={(e) => updateEntry(exp.id, 'isCurrent', e.target.checked)}
+                        onChange={(e) => updateEntryAction('experience', exp.id, 'isCurrent', e.target.checked)}
                         className="w-3.5 h-3.5 rounded border-outline text-primary focus:ring-primary"
                       />
                       <label htmlFor={`current-${exp.id}`} className="text-[10px] font-bold uppercase text-on-surface-variant tracking-wider cursor-pointer">
@@ -106,7 +110,7 @@ const ExperienceForm = ({ experience, addEntry, removeEntry, updateEntry }) => {
                       <FormInput
                         label=""
                         value={exp.endYear}
-                        onChange={(e) => updateEntry(exp.id, 'endYear', e.target.value)}
+                        onChange={(e) => updateEntryAction('experience', exp.id, 'endYear', e.target.value)}
                       />
                     )}
                   </div>

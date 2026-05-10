@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useResume } from '../context/ResumeContext';
 
-const SkillsForm = ({ skills, addSkill, removeSkill }) => {
+const SkillsForm = () => {
+  const { resumeData, addSkill, removeSkill } = useResume();
+  const skills = resumeData.skills;
   const [newSkill, setNewSkill] = useState('');
 
   const handleAdd = () => {

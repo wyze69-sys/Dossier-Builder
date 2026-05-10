@@ -21,12 +21,26 @@ export default {
         border: {
           DEFAULT: '#e2e8f0', // slate-200
           dark: '#334155', // slate-700
-        }
+        },
+        'surface-container-lowest': '#ffffff',
+        'surface-container-low': '#f8fafc',
+        'surface-container': '#f1f5f9',
+        'surface-container-high': '#e2e8f0',
+        'surface-container-highest': '#cbd5e1',
+        'on-surface': '#0f172a',
+        'on-surface-variant': '#475569',
+        'secondary-container': '#e0e7ff',
+        'on-secondary-fixed-variant': '#3730a3',
+        'primary-fixed': '#e0e7ff',
+        'outline': '#94a3b8',
+        'outline-variant': '#cbd5e1',
+        'error': '#ef4444',
       },
       fontFamily: {
         "headline": ["Inter", "sans-serif"],
         "body": ["Inter", "sans-serif"],
         "label": ["Inter", "sans-serif"],
+        "manrope": ["Manrope", "sans-serif"],
       },
       letterSpacing: {
         tightest: '-.075em',
