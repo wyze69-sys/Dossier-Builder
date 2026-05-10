@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useResume } from '../context/ResumeContext';
 
-const LanguagesForm = ({ data = [], addEntry, removeEntry, updateEntry }) => {
+const LanguagesForm = () => {
+  const { resumeData, addEntry, removeEntry, updateEntry } = useResume();
+  const data = resumeData.languages || [];
+
   return (
     <div className="bg-surface-container-lowest rounded-xl p-8 ambient-shadow space-y-6 fade-slide-in mt-6">
       <div className="flex items-center justify-between">

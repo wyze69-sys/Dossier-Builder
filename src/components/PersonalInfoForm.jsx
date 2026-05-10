@@ -1,6 +1,9 @@
 import FormInput from './common/FormInput';
+import { useResume } from '../context/ResumeContext';
 
-const PersonalInfoForm = ({ data, updatePersonalInfo }) => {
+const PersonalInfoForm = () => {
+  const { resumeData: data, updatePersonalInfo } = useResume();
+
   const handleChange = (field) => (e) => {
     updatePersonalInfo(field, e.target.value);
   };

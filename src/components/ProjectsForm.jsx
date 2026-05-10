@@ -1,6 +1,10 @@
 import FormInput from './common/FormInput';
+import { useResume } from '../context/ResumeContext';
 
-const ProjectsForm = ({ projects, addEntry, removeEntry, updateEntry }) => {
+const ProjectsForm = () => {
+  const { resumeData, addEntry: addEntryAction, removeEntry: removeEntryAction, updateEntry: updateEntryAction } = useResume();
+  const projects = resumeData.projects;
+
   return (
     <div className="space-y-6">
       {/* Section Header */}
@@ -11,7 +15,7 @@ const ProjectsForm = ({ projects, addEntry, removeEntry, updateEntry }) => {
         </h3>
         <button
           type="button"
-          onClick={addEntry}
+          onClick={() => addEntryAction('projects')}
           className="text-xs font-bold text-primary hover:underline flex items-center gap-1"
         >
           <span className="material-symbols-outlined text-[18px]">add</span> Add Project
@@ -28,7 +32,7 @@ const ProjectsForm = ({ projects, addEntry, removeEntry, updateEntry }) => {
             {/* Delete Button */}
             <button
               type="button"
-              onClick={() => removeEntry(proj.id)}
+              onClick={() => removeEntryAction('projects', proj.id)}
               className="absolute top-4 right-4 text-outline hover:text-error transition-colors opacity-0 group-hover:opacity-100"
             >
               <span className="material-symbols-outlined text-[20px]">close</span>
@@ -38,18 +42,18 @@ const ProjectsForm = ({ projects, addEntry, removeEntry, updateEntry }) => {
               <FormInput
                 label="Project Title"
                 value={proj.title}
-                onChange={(e) => updateEntry(proj.id, 'title', e.target.value)}
+                onChange={(e) => updateEntryAction('projects', proj.id, 'title', e.target.value)}
               />
               <FormInput
                 label="Role / Contribution"
                 value={proj.role}
-                onChange={(e) => updateEntry(proj.id, 'role', e.target.value)}
+                onChange={(e) => updateEntryAction('projects', proj.id, 'role', e.target.value)}
               />
               <FormInput
                 label="Description & Impact"
                 type="textarea"
                 value={proj.description}
-                onChange={(e) => updateEntry(proj.id, 'description', e.target.value)}
+                onChange={(e) => updateEntryAction('projects', proj.id, 'description', e.target.value)}
               />
             </div>
           </div>

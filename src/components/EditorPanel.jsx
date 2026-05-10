@@ -1,3 +1,4 @@
+import { useResume } from '../context/ResumeContext';
 import PersonalInfoForm from './PersonalInfoForm';
 import EducationForm from './EducationForm';
 import ExperienceForm from './ExperienceForm';
@@ -5,21 +6,12 @@ import SkillsForm from './SkillsForm';
 import LanguagesForm from './LanguagesForm';
 import ProjectsForm from './ProjectsForm';
 
-const EditorPanel = ({ 
-  resumeData, 
-  updatePersonalInfo,
-  addEntry,
-  removeEntry,
-  updateEntry,
-  addSkill,
-  removeSkill,
-  fillExampleData,
-  clearData
-}) => {
+const EditorPanel = () => {
+  const { fillExampleData, clearData } = useResume();
+
   return (
     <section id="editor-scroll-container" className="flex-1 overflow-y-auto p-6 md:p-10 space-y-10 bg-surface-container-low/50 smooth-scroll">
       <div className="max-w-2xl mx-auto space-y-12 pb-20">
-        {/* Section Header */}
         <div className="flex items-start justify-between">
           <div className="space-y-1">
             <h1 className="text-3xl font-extrabold text-on-surface font-manrope tracking-tight">
@@ -49,67 +41,12 @@ const EditorPanel = ({
           </div>
         </div>
 
-        {/* Form Sections */}
-        <div id="section-personal">
-          <PersonalInfoForm
-            data={{
-              fullName: resumeData.fullName,
-              jobTitle: resumeData.jobTitle,
-              email: resumeData.email,
-              phone: resumeData.phone,
-              summary: resumeData.summary,
-              linkedin: resumeData.linkedin,
-              portfolio: resumeData.portfolio,
-              location: resumeData.location,
-              profileImage: resumeData.profileImage,
-            }}
-            updatePersonalInfo={updatePersonalInfo}
-          />
-        </div>
-        
-        <div id="section-education">
-          <EducationForm 
-            education={resumeData.education} 
-            addEntry={() => addEntry('education')}
-            removeEntry={(id) => removeEntry('education', id)}
-            updateEntry={(id, field, value) => updateEntry('education', id, field, value)}
-          />
-        </div>
-        
-        <div id="section-experience">
-          <ExperienceForm 
-            experience={resumeData.experience} 
-            addEntry={() => addEntry('experience')}
-            removeEntry={(id) => removeEntry('experience', id)}
-            updateEntry={(id, field, value) => updateEntry('experience', id, field, value)}
-          />
-        </div>
-        
-        <div id="section-skills">
-          <SkillsForm 
-            skills={resumeData.skills} 
-            addSkill={addSkill}
-            removeSkill={removeSkill}
-          />
-        </div>
-
-        <div id="section-languages">
-          <LanguagesForm 
-            data={resumeData.languages || []} 
-            addEntry={addEntry}
-            removeEntry={removeEntry}
-            updateEntry={updateEntry}
-          />
-        </div>
-
-        <div id="section-projects">
-          <ProjectsForm 
-            projects={resumeData.projects} 
-            addEntry={() => addEntry('projects')}
-            removeEntry={(id) => removeEntry('projects', id)}
-            updateEntry={(id, field, value) => updateEntry('projects', id, field, value)}
-          />
-        </div>
+        <div id="section-personal"><PersonalInfoForm /></div>
+        <div id="section-education"><EducationForm /></div>
+        <div id="section-experience"><ExperienceForm /></div>
+        <div id="section-skills"><SkillsForm /></div>
+        <div id="section-languages"><LanguagesForm /></div>
+        <div id="section-projects"><ProjectsForm /></div>
       </div>
     </section>
   );

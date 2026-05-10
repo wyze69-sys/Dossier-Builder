@@ -9,7 +9,7 @@ const navItems = [
   { icon: 'architecture', label: 'Projects', id: 'projects' },
 ];
 
-const SideNavigation = ({ fullName }) => {
+const SideNavigation = () => {
   const [activeSection, setActiveSection] = useState('personal');
 
   useEffect(() => {
