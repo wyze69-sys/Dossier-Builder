@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState, useEffect } from 'react';
+import { createContext, useContext, useReducer, useEffect } from 'react';
 
 const generateId = () => {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) {
@@ -123,18 +123,6 @@ export function ResumeProvider({ children }) {
     return initialData;
   });
 
-  const [isDark, setIsDark] = useState(() => localStorage.getItem('theme') === 'dark');
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDark);
-  }, [isDark]);
-
-  const toggleDark = () => {
-    const next = !isDark;
-    setIsDark(next);
-    localStorage.setItem('theme', next ? 'dark' : 'light');
-  };
-
   // Debounced localStorage save
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -172,7 +160,6 @@ export function ResumeProvider({ children }) {
 
   const value = {
     resumeData,
-    isDark, toggleDark,
     updatePersonalInfo,
     addEntry, removeEntry, updateEntry,
     addSkill, removeSkill,

@@ -1,7 +1,4 @@
-import { useResume } from '../context/ResumeContext';
-
-const TopNavigation = ({ activeTab, setActiveTab, onDownloadPDF, onTogglePreview }) => {
-  const { isDark, toggleDark } = useResume();
+const TopNavigation = ({ activeTab, setActiveTab, onDownloadPDF, onTogglePreview, isDark, toggleDark }) => {
 
   return (
     <header className="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-sm dark:shadow-none transition-colors">

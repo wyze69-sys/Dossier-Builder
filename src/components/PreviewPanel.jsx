@@ -122,7 +122,8 @@ const PreviewPanel = forwardRef((props, ref) => {
             top: 0,
             left: '-9999px',
             width: '794px',
-            minHeight: '1123px',
+            height: '1123px',
+            overflow: 'hidden',
             background: '#ffffff',
             zIndex: -1,
           }}
